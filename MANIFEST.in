@@ -1,0 +1,10 @@
+include README.md LICENSE
+recursive-include contributor_ci *.png
+recursive-include contributor_ci *.sh
+recursive-include contributor_ci *
+recursive-include * *.png
+global-exclude .env
+global-exclude *.py[co]
+recursive-exclude .git *
+global-exclude __pycache__
+prune docs*
