@@ -1,5 +1,9 @@
+
+# The output directory to create a structure of results
+# defaults to $PWD/.cci if not set
+outdir: null
+
 # memberOrgs will be used to label associated members as "internal"
-# This file is subject to change!
 member_orgs:
   - llnl
 
