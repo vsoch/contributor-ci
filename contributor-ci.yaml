@@ -32,6 +32,7 @@ repos:
  - ceed/benchmarks
  - ceed/laghos
  - ceed/libceed
+ - ceed/remhos
  - chu11/freeipmi-mirror
  - dun/conman
  - dun/munge
@@ -61,3 +62,14 @@ repos:
  - sabersw/pysaber
  - shusenl/nlpvis
  - xbraid/xbraid
+ 
+# do not include these repos in the assessment
+exclude_repos:
+ - mfem/github-actions
+ - mfem/doxygen
+ - mfem/releases
+ - mfem/mfem-uberenv
+ - mfem/tpls
+ - mfem/data
+ - glvis/doxygen
+ - glvis/releases

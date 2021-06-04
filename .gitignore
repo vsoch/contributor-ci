@@ -1,5 +1,4 @@
-shpc.db
-singularity_hpc.egg-info/
+contributor_ci.egg-info/
 env
 .env
 env
@@ -14,4 +13,4 @@ __pycache__
 *.sif
 *.img
 .eggs
-modules
+.cci

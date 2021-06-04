@@ -4,7 +4,6 @@ __author__ = "Vanessa Sochat"
 __copyright__ = "Copyright 2021, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
-import shpc
 import contributor_ci
 from contributor_ci.logger import setup_logger
 import argparse
@@ -128,7 +127,7 @@ def run():
 
     # Show the version and exit
     if args.command == "version" or args.version:
-        print(shpc.__version__)
+        print(contributor_ci.__version__)
         sys.exit(0)
 
     setup_logger(

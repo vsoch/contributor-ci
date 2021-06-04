@@ -17,6 +17,7 @@ INSTALL_REQUIRES = (
     ("Jinja2", {"min_version": None}),
     ("jsonschema", {"min_version": None}),
     ("ruamel.yaml", {"min_version": None}),
+    ("llnl-scraper", {"min_version": "0.10.0"}),
 )
 
 TESTS_REQUIRES = (("pytest", {"min_version": "4.6.2"}),)
