@@ -7,27 +7,6 @@
 
 **under development**
 
-## Usage
-
-**coming soon**
-
-### contributor-action
-
-A GitHub action to collect temporal metrics about the number of internal and
-external contributors to your organization. You might be interested in using
-this if you are starting a campaign to improve participation.
-
-#### 1. repos.yaml
-
-The one requirement you will need is a contributor-ci.yaml file, which is a configuration
-file that include:
-
-##### organizations
-
-We need to know about member organizations (under which you can extract members and label them as internal
-to your organization), and additional organizations that have member projects. 
-You can see [contributor-ci.yaml](contributor-ci.yaml) for an example.
-
 ## Thanks
 
 The graphQL queries come from [llnl.github.io](https://github.com/LLNL/llnl.github.io) which is released
@@ -35,9 +14,10 @@ under an [MIT license](.github/LICENSE-LLNL).
 
 ## TODO
 
- - should read in a contributor-ci.yaml file and require github token exported
- - write client that writes to a specified output directory
- - organized by content - should be repos, users, dates, etc.
- - contributor-action can be run to generate this data
+ - finish writing GitHub extractors
+ - write tests for extractors, doing a small extraction
+ - when extractors done - write into GitHub action
+ - set up repository to run nightly extractions
+ - develop visualizations
  - contributor friendliness assessment should discover a new repo, if a file doesn't exist, open a PR
 
