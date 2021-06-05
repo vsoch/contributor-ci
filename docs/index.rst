@@ -38,6 +38,8 @@ Resources
    :maxdepth: 2
 
    getting_started/index
+   getting_started/user-guide
+   getting_started/developer-guide
 
 .. toctree::
     :caption: API Reference

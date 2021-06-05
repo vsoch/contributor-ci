@@ -9,10 +9,9 @@ one or more repositories or an organization over time.
 If you haven't read :ref:`getting_started-installation` you should do that first.
 
 
-Really Quick Start
-==================
+Quick Start
+===========
 
-TODO
 
 .. code-block:: console
 
@@ -27,18 +26,6 @@ TODO
     
     # Run an extraction
     $ cci extract repos
-
-
-
-Quick Start
-===========
-
-TOOD
-
-.. code-block:: console
-
-
-.. _getting_started-config:
 
 
 Configuration

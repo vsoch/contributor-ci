@@ -47,7 +47,7 @@
    .wy-nav-top,
    .wy-menu-vertical li.toctree-l2.current li.toctree-l3>a:hover {
        background: white;
-       color: #fee;
+       color: #C9FBC9;
    }
    
    /* Main content
@@ -55,7 +55,7 @@
    
    .wy-nav-content .highlight,
    .wy-nav-content .rst-content .warning {
-       background: #FEE;
+       background: #C9FBC9;
    }
    
    .wy-nav-content .rst-content .warning .admonition-title {
