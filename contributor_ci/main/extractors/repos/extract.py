@@ -3,32 +3,16 @@ __copyright__ = "Copyright 2021, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 from contributor_ci.logger import logger
-from contributor_ci.main.extractors.base import ExtractorBase
-from scraper.github import queryManager as qm
+from contributor_ci.main.extractor import GitHubExtractorBase
 
 import os
 
 
-class Repos(ExtractorBase):
+class Repos(GitHubExtractorBase):
 
     name = "repos"
     description = "extract repository metrics."
-
-    def __init__(self):
-        super().__init__(__file__)
-        # Requires export of GITHUB_TOKEN
-        self.require_github()
-        self._manager = None
-
-    @property
-    def manager(self):
-        """
-        Get or initialize the GitHub GraphQL Manager
-        """
-        if not self._manager:
-            # Create a query manager
-            self._manager = qm.GitHubQueryManager(self.token)
-        return self._manager
+    filenames = ["repos"]
 
     def extract(self):
         """

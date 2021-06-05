@@ -11,11 +11,8 @@ Contributor CI
 
 Contributor CI provides tools for assessing collaboration. You can use the
 associated GitHub actions to collect metrics on a regular basis, or the visualization
-tools to look at them.
-
- - `LMOD <https://lmod.readthedocs.io/en/latest/>`_
-
-You might want to use Contributor CI if you are interested in collecting data to assess collaboration over time.
+tools to look at them. You might want to use Contributor CI if you are interested in
+collecting data to assess collaboration over time.
 
 .. _main-support:
 

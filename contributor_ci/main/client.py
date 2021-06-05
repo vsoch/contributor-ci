@@ -6,7 +6,7 @@ __license__ = "MPL 2.0"
 from contributor_ci.logger import logger
 import contributor_ci.utils as utils
 from .settings import Settings
-from .extractors.base import ExtractorFinder
+from .extractor import ExtractorFinder, ExtractorResolver
 
 import importlib
 import os
@@ -51,13 +51,52 @@ class Client:
         """
         Extract metrics given a particular method
         """
+        # TODO: we need to derive dependnecy dag here
+        # The extractor should be loaded, if there are depends on
+        # then instantiate a graph, keep adding libraries until
+        # no more depends on, then create a dag, run extractors
+        # in order of that dag.
         if method not in self.extractors:
             logger.exit("Extractor %s is not known." % method)
 
         ext = self.get_extractor(method)
-        _, extractor_name = self._extractors[method].rsplit(".", 1)
-        self._results[extractor_name] = ext.extract()
-        ext.save_json(self.out_dir)
+
+        # Each extractor defines depends_on, and we need to create a DAG that
+        # checks dependencies first (either running or finding that already run)
+        lookup = {}
+        resolver = ExtractorResolver()
+
+        # Keep going until no more dependencies
+        expanded = set([ext])
+        seen = set()
+        while expanded:
+            ext = expanded.pop()
+            lookup[ext.name] = ext
+            if ext in seen:
+                continue
+            seen.add(ext)
+            resolver.add_extractor(ext.name)
+            for depname in ext.depends_on:
+                dep = self.get_extractor(depname)
+                resolver.add_extractor(dep.name)
+                resolver.add_dependency(ext.name, dep.name)
+                expanded.add(dep)
+
+        order = resolver.resolve()
+
+        ran = False
+        for name in order:
+            extractor = lookup[name]
+
+            # Only run the extractor if the result does not exist
+            if not extractor.exists():
+                self._results[extractor.name] = extractor.extract()
+                extractor.save_json()
+                ran = True
+
+        # No extractors to run?
+        if not ran:
+            logger.exit("Extractor runs are up to date.", return_code=0)
 
     def __repr__(self):
         return str(self)
@@ -66,10 +105,9 @@ class Client:
         return "[contributor-ci-client]"
 
     def extract_all(self, versions=None):
-        print("EXTRACT ALL")
-        import IPython
-
-        IPython.embed()
+        """
+        Run all extractors
+        """
         for name in self.extractors:
             self.extract(name)
 
@@ -80,4 +118,5 @@ class Client:
         module, extractor_name = self._extractors[name].rsplit(".", 1)
         ext = getattr(importlib.import_module(module), extractor_name)()
         ext.settings = self.settings
+        ext.outdir = self.out_dir
         return ext

@@ -115,7 +115,10 @@ class Logger:
         self.handler(dict(level="error", msg=msg))
 
     def exit(self, msg, return_code=1):
-        self.handler(dict(level="error", msg=msg))
+        if return_code == 0:
+            self.handler(dict(level="info", msg=msg))
+        else:
+            self.handler(dict(level="error", msg=msg))
         sys.exit(return_code)
 
     def progress(self, done=None, total=None):

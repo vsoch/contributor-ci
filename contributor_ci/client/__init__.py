@@ -46,7 +46,7 @@ def get_parser():
         "--out-dir",
         dest="outdir",
         help="Specify a custom output directory (defaults to $PWD/.cci)",
-        default="contributor-ci.yaml",
+        default=None,
     )
 
     parser.add_argument(

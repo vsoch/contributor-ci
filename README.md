@@ -28,6 +28,11 @@ We need to know about member organizations (under which you can extract members 
 to your organization), and additional organizations that have member projects. 
 You can see [contributor-ci.yaml](contributor-ci.yaml) for an example.
 
+## Thanks
+
+The graphQL queries come from [llnl.github.io](https://github.com/LLNL/llnl.github.io) which is released
+under an [MIT license](.github/LICENSE-LLNL).
+
 ## TODO
 
  - should read in a contributor-ci.yaml file and require github token exported

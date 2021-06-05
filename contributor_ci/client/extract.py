@@ -12,10 +12,13 @@ def main(args, parser, extra, subparser):
     cli = Client(quiet=args.quiet, config_file=args.config_file, outdir=args.outdir)
 
     # Allowed extractors
-    if args.method not in ["users", "repos", "all"]:
+    available = list(cli.extractors) + ["all"]
+    if args.method not in available:
         logger.exit(
-            "%s is not a valid extraction method! Choose from %s."
-            % ",".join(cli.extractors)
+            "%s is not a valid extraction method! Choose from %s." % ",".join(available)
         )
 
-    cli.extract(args.method)
+    if args.method == "all":
+        cli.extract_all()
+    else:
+        cli.extract(args.method)
