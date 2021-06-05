@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# shpc documentation build configuration file, created by
-# sphinx-quickstart on Sat Feb  1 16:01:02 2014.
-#
 # This file is execfile()d with the current directory set to its
 # containing dir.
 #
@@ -61,7 +58,7 @@ master_doc = "index"
 project = "Contributor CI"
 copyright = "2021, Vanessa Sochat"
 
-from shpc import version
+from contributor_ci import version
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
