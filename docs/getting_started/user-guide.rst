@@ -164,6 +164,7 @@ options are! For this purpose you can use ``list``:
 .. code-block:: console
 
     $ cci list
+               dependencies: contributor_ci.main.extractors.collection.repos.extract.Dependencies
                repos: contributor_ci.main.extractors.collection.repos.extract.Repos
                users: contributor_ci.main.extractors.collection.users.extract.Users
 
@@ -199,3 +200,27 @@ It is a tree organized by year, month, and day:
          └── 6
              └── 3
                  └── cci-repos.json
+                 
+                 
+Extractors
+==========
+
+The following extractors are available.
+
+
+.. list-table:: Title
+   :widths: 25 65 10
+   :header-rows: 1
+
+   * - Name
+     - Description
+     - Depends On
+   * - repos
+     - Extract repository metadata
+     - none
+   * - users
+     - Extract internal and external contributors lists
+     - repos  
+   * - dependencies
+     - Extract dependencies for repositories
+     - repos
