@@ -12,6 +12,6 @@ def main(args, parser, extra, subparser):
 
     for name, extractor in client.extractors.items():
         if not args.query:
-            print("%20s: %s" % (name, extractor))
+            print("%20s: %s" % (name, extractor.description))
         elif args.query and re.search(args.query, name):
-            print("%20s: %s" % (name, extractor))
+            print("%20s: %s" % (name, extractor.description))

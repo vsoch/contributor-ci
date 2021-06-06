@@ -8,7 +8,6 @@ import contributor_ci.utils as utils
 from .settings import Settings
 from .extractor import ExtractorFinder, ExtractorResolver
 
-import importlib
 import os
 import shutil
 import sys
@@ -115,8 +114,7 @@ class Client:
         """
         Load the extractor class based on its name and add settings.
         """
-        module, extractor_name = self._extractors[name].rsplit(".", 1)
-        ext = getattr(importlib.import_module(module), extractor_name)()
+        ext = self._extractors[name]
         ext.settings = self.settings
         ext.outdir = self.out_dir
         return ext

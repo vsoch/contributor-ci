@@ -12,6 +12,7 @@ from collections import defaultdict
 from datetime import datetime
 
 from scraper.github import queryManager as qm
+import importlib
 
 import inspect
 import abc
@@ -72,10 +73,8 @@ class ExtractorFinder(Mapping):
 
             # The class name means we split by underscore, capitalize, and join
             class_name = "".join([x.capitalize() for x in name.split("_")])
-            lookup[name] = "contributor_ci.main.extractors.%s.extract.%s" % (
-                name,
-                class_name,
-            )
+            module = "contributor_ci.main.extractors.%s.extract" % name
+            lookup[name] = getattr(importlib.import_module(module), class_name)()
         return lookup
 
 
@@ -180,7 +179,6 @@ class GitHubExtractorBase(ExtractorBase):
     def __init__(self):
         super().__init__()
         # Requires export of GITHUB_TOKEN
-        self.require_github()
         self._manager = None
 
     def load_dependency_file(self, name):
@@ -195,6 +193,7 @@ class GitHubExtractorBase(ExtractorBase):
         """
         Get or initialize the GitHub GraphQL Manager
         """
+        self.require_github()
         if not self._manager:
             # Create a query manager
             self._manager = qm.GitHubQueryManager(self.token)

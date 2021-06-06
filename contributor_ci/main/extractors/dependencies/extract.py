@@ -30,7 +30,9 @@ class Dependencies(GitHubExtractorBase):
         logger.info("Found %s repositories to find dependencies for." % len(repolist))
 
         for i, repo in enumerate(repolist):
-            logger.info("Getting dependencies for %s, %s of %s" % (repo, i, len(repolist)))
+            logger.info(
+                "Getting dependencies for %s, %s of %s" % (repo, i, len(repolist))
+            )
             repo_user, repo_name = repo.split("/")
             try:
                 out = self.manager.queryGitHubFromFile(

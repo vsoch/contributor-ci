@@ -164,9 +164,10 @@ options are! For this purpose you can use ``list``:
 .. code-block:: console
 
     $ cci list
-               dependencies: contributor_ci.main.extractors.collection.repos.extract.Dependencies
-               repos: contributor_ci.main.extractors.collection.repos.extract.Repos
-               users: contributor_ci.main.extractors.collection.users.extract.Users
+           languages: extract languages for a repository.
+        dependencies: extract repository dependencies.
+               repos: extract repository metrics.
+               users: extract user metrics for a repository.
 
 
 Extract
