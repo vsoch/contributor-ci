@@ -68,6 +68,18 @@ def get_parser():
     # print version and exit
     subparsers.add_parser("version", help="show software version")
 
+    config = subparsers.add_parser(
+        "config",
+        help="update configuration file. Use sort, edit, add, or remove to edit fields.",
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
+    config.add_argument(
+        "params",
+        nargs="*",
+        help="edit, add, remove, or sort",
+        type=str,
+    )
+
     # See extractors
     listing = subparsers.add_parser(
         "list",
@@ -154,6 +166,8 @@ def run():
         from .listing import main
     elif args.command == "shell":
         from .shell import main
+    elif args.command == "config":
+        from .config import main
 
     # Pass on to the correct parser
     return_code = 0

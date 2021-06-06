@@ -15,8 +15,8 @@ configProperties = {
     "repos": unique_array,
     "exclude_repos": unique_array,
     "outdir": {"type": ["string", "null"]},
+    "editor": {"type": ["string", "null"]},
 }
-
 
 config_schema = {
     "$schema": schema_url,

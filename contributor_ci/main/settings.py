@@ -6,6 +6,7 @@ __license__ = "MPL 2.0"
 from contributor_ci.logger import logger
 import contributor_ci.defaults as defaults
 import contributor_ci.main.schemas
+import contributor_ci.utils
 
 try:
     from ruamel_yaml import YAML
@@ -57,6 +58,45 @@ class SettingsBase:
         with open(self.settings_file, "r") as fd:
             self._settings = yaml.load(fd.read())
 
+    def add(self, key, value):
+        """
+        Given an existing key and a value, add the value to the list.
+        """
+        current = self.get(key)
+        if not current:
+            logger.exit("%s is not a known key to add to." % key)
+        if not isinstance(current, list):
+            logger.exit("You can only remove from a setting key that is a list.")
+        logger.info("Adding %s to %s" % (value, key))
+        current.append(value)
+        current = sorted(list(set(current)))
+        self.set(key, current)
+
+    def remove(self, key, value):
+        """
+        Given an existing key and a value, remove the value.
+        """
+        current = self.get(key)
+        if not current:
+            logger.exit("%s is not a known key to remove from." % key)
+        if not isinstance(current, list):
+            logger.exit("You can only remove from a setting key that is a list.")
+        current = set(current)
+        if value not in current:
+            logger.exit("%s is not in %s." % (value, key))
+        logger.info("Removing %s from %s" % (value, key))
+        current.remove(value)
+        current = sorted(list(current))
+        self.set(key, current)
+
+    def sort(self):
+        """
+        Sort all lists.
+        """
+        for key, value in self._settings.items():
+            if isinstance(value, list):
+                value.sort()
+
     def get(self, key, default=None):
         value = self._settings.get(key, default)
         return self._substitutions(value)
@@ -66,6 +106,15 @@ class SettingsBase:
         A direct get of an attribute, but default to None if doesn't exist
         """
         return self.get(key)
+
+    def edit(self):
+        """
+        Interactively edit a config file.
+        """
+        editor = self.editor or "vim"
+        if not self.settings_file or not os.path.exists(self.settings_file):
+            logger.exit("Settings file not found.")
+        contributor_ci.utils.run_command([editor, self.settings_file], stream=True)
 
     def set(self, key, value):
         """
@@ -132,6 +181,3 @@ class Settings(SettingsBase):
         """
         self.load(settings_file)
         self.validate()
-
-        # Set an updated time, in case it's written back to file
-        self._settings["updated_at"] = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")

@@ -91,9 +91,12 @@ This file should have the following fields:
      - false
    * - outdir
      - An output directory (must exist) to save results.
-     - unset
      - $PWD/.cci
-
+     - true
+   * - editor
+     - An editor to use for cci config edit
+     - vim
+     - false
 
 .. _getting_started-commands:
 
@@ -117,6 +120,37 @@ Once you have your configuration file, and exported a GitHub `personal access to
 
 
 .. _getting_started-commands-extract:
+
+
+Config
+------
+
+Contributor CI provides an easy way to interact with your configuration file,
+the file ``contributor-ci.yaml``. First, to edit the file, you can do:
+
+.. code-block:: console
+
+    $ cci config edit
+    
+By default, the editor chosen is vim. If you add an ``editor`` field
+to that same file, you can choose an editor of your choice.
+You can also quickly sort your file in the case that you made a bunch
+of additions and want to ensure they are sorted. Note that sorting
+happens automatically when you do an add or remove operation.
+
+.. code-block:: console
+
+    $ cci config sort
+
+
+Next, you might want to add a repository or organization to a list. You can
+use add and remove to do this. You should provide the key first (e.g. member_orgs)
+followed by one more entries to add or remove.
+
+.. code-block:: console
+
+    $ cci config add member_orgs vsoch
+    $ cci config remove member_orgs vsoch
 
 
 List
