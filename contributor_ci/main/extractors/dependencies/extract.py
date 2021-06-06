@@ -11,52 +11,49 @@ import os
 class Dependencies(GitHubExtractorBase):
 
     name = "dependencies"
-    description = "extract repository dependencies."
+    description = "extract dependencies."
     filenames = ["dependencies"]
-    depends_on = ["repos"]
+    depends_on = ["repo_dependencies"]
 
     def extract(self):
         """
-        Extract repository dependencies.
+        Extract more metadata about repository dependencies.
         """
-        dep_query = self.get_local_query("repo-dependencies.gql")
+        dep_query = self.get_local_query("dependencies-info.gql")
 
         # This extract only saves one result - a repos file
         self._data[self.name] = {}
 
         # We require internal repositories list as input
-        repos = self.load_dependency_file("repos")
-        repolist = sorted(repos.data.keys())
-        logger.info("Found %s repositories to find dependencies for." % len(repolist))
+        depends = self.load_dependency_file("repo_dependencies")
+        logger.info("Found %s dependencies to find metadata for." % len(depends.data))
 
+        repolist = []
+        # Generate a list (will have duplicates) of dependency names
+        for i, name in enumerate(depends.data):
+            for node in depends.data[name]["dependencyGraphManifests"]["nodes"]:
+                for repo in node["dependencies"]["nodes"]:
+                    if repo["repository"] and repo["repository"]["nameWithOwner"]:
+                        repolist.append(repo["repository"]["nameWithOwner"])
+
+        # This ensures unique!
+        repolist = list(dict.fromkeys(repolist))
+        repolist.sort()
+        logger.info("Found %s dependency repositories." % len(repolist))
         for i, repo in enumerate(repolist):
-            logger.info(
-                "Getting dependencies for %s, %s of %s" % (repo, i, len(repolist))
-            )
             repo_user, repo_name = repo.split("/")
+            logger.info(
+                "Getting dependency metadata for %s, %s of %s"
+                % (repo, i, len(repolist))
+            )
             try:
                 out = self.manager.queryGitHubFromFile(
                     dep_query,
-                    {
-                        "ownName": repo_user,
-                        "repoName": repo_name,
-                        "numManifests": 100,
-                        "numDependents": 100,
-                        "pgCursor": None,
-                    },
-                    paginate=True,
-                    cursorVar="pgCursor",
-                    keysToList=[
-                        "data",
-                        "repository",
-                        "dependencyGraphManifests",
-                        "nodes",
-                    ],
+                    {"ownName": repo_user, "repoName": repo_name},
                     headers={"Accept": "application/vnd.github.hawkgirl-preview+json"},
                 )
             except Exception as error:
-                logger.warning("Warning: Could not complete '%s':%s" % (repo, error))
+                logger.warning("Warning: Could not complete '%s': %s" % (repo, error))
                 continue
 
-            # save dependency data for repository
             self._data[self.name][repo] = out["data"]["repository"]

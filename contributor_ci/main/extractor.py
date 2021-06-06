@@ -172,7 +172,8 @@ class ExtractorBase:
         for name, result in results.items():
             outfile = "cci-%s.json" % name
             outfile = os.path.join(outdir, outfile)
-            contributor_ci.utils.write_json(result, outfile)
+            if result:
+                contributor_ci.utils.write_json(result, outfile)
 
 
 class GitHubExtractorBase(ExtractorBase):

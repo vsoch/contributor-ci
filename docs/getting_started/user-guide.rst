@@ -164,10 +164,12 @@ options are! For this purpose you can use ``list``:
 .. code-block:: console
 
     $ cci list
-           languages: extract languages for a repository.
-        dependencies: extract repository dependencies.
-               repos: extract repository metrics.
-               users: extract user metrics for a repository.
+       repo_dependencies: extract repository dependencies.
+               languages: extract languages for a repository.
+                releases: extract repository releases.
+            dependencies: extract dependencies.
+                   repos: extract repository metrics.
+                   users: extract user metrics for a repository.
 
 
 Extract
@@ -209,7 +211,7 @@ Extractors
 The following extractors are available.
 
 
-.. list-table:: Title
+.. list-table:: Contributor CI Extractors
    :widths: 25 65 10
    :header-rows: 1
 
@@ -222,6 +224,15 @@ The following extractors are available.
    * - users
      - Extract internal and external contributors lists
      - repos  
+   * - repo_dependencies
+     - Extract repository dependencies
+     - repos
    * - dependencies
-     - Extract dependencies for repositories
+     - Extract dependency metadata
+     - repo_dependencies
+   * - releases
+     - Extract releases for repositories
+     - repos
+   * - languages
+     - Extract languages for repositories
      - repos
