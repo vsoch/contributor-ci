@@ -164,12 +164,15 @@ options are! For this purpose you can use ``list``:
 .. code-block:: console
 
     $ cci list
+        creation_history: extract creation history for repositories.
+         activitycommits: extract internal repository activity and commits.
        repo_dependencies: extract repository dependencies.
                languages: extract languages for a repository.
                 releases: extract repository releases.
             dependencies: extract dependencies.
                    repos: extract repository metrics.
                    users: extract user metrics for a repository.
+              repo_users: extract repositories worked on for external and internal users.
 
 
 Extract
@@ -235,4 +238,13 @@ The following extractors are available.
      - repos
    * - languages
      - Extract languages for repositories
+     - repos
+   * - activitycommits
+     - Extract weekly number of repository commits to reflect activity
+     - repos
+   * - repo_users
+     - Extract users and repositories contributed to (internal and external)
+     - users     
+   * - creation_history
+     - Extract creation history (first commit) of repositories
      - repos

@@ -14,6 +14,7 @@ from datetime import datetime
 from scraper.github import queryManager as qm
 import importlib
 
+from glob import glob
 import inspect
 import abc
 import os
@@ -139,6 +140,16 @@ class ExtractorBase:
             logger.exit("Dependency file %s does not exist." % filename)
         return filename
 
+    def get_recent_dependency_file(self, name):
+        """
+        Given the name of a dependency file, find the latest.
+        """
+        # Likely the path separator is /.
+        recents = glob("%s/*/*/*/cci-%s.json" % (self.outdir, name))
+        recents.sort()
+        if recents:
+            return recents.pop()
+
     def get_local_query(self, path):
         """
         Given the path of a graph ql (.gql) file in the collection, return it
@@ -188,6 +199,14 @@ class GitHubExtractorBase(ExtractorBase):
         """
         filename = self.get_dependency_file(name)
         return qm.DataManager(filename, True)
+
+    def load_recent_dependency_file(self, name):
+        """
+        Given the name of a dependency, find and load the file
+        """
+        filename = self.get_recent_dependency_file(name)
+        if filename:
+            return qm.DataManager(filename, True)
 
     @property
     def manager(self):
