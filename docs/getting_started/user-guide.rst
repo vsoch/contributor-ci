@@ -169,6 +169,7 @@ options are! For this purpose you can use ``list``:
        repo_dependencies: extract repository dependencies.
                languages: extract languages for a repository.
                 releases: extract repository releases.
+                   stars: extract repository stars.
             dependencies: extract dependencies.
                    repos: extract repository metrics.
                    users: extract user metrics for a repository.
@@ -244,7 +245,10 @@ The following extractors are available.
      - repos
    * - repo_users
      - Extract users and repositories contributed to (internal and external)
-     - users     
+     - users    
    * - creation_history
      - Extract creation history (first commit) of repositories
+     - repos
+   * - stars
+     - Extract repository stars
      - repos

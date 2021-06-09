@@ -6,18 +6,19 @@ from contributor_ci.main.extractor import GitHubExtractorBase
 from contributor_ci.logger import logger
 import re
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 
-class ActivityCommits(GitHubExtractorBase):
+class ActivityLines(GitHubExtractorBase):
 
-    name = "activity_commits"
-    description = "extract internal repository commit activity."
+    name = "activity_lines"
+    description = "extract internal repository activity via lines of code."
     depends_on = ["repos"]
-    filenames = ["activity_commits"]
+    filenames = ["activity_lines"]
 
     def extract(self):
         """
-        Extract metadata about activity and commits
+        Extract metadata about lines of code.
         """
         self._data[self.name] = {}
 
@@ -25,12 +26,17 @@ class ActivityCommits(GitHubExtractorBase):
         repos = self.load_dependency_file("repos")
         repolist = sorted(repos.data.keys())
 
-        query = "/repos/OWNNAME/REPONAME/stats/commit_activity"
+        # Code frequency endpoint
+        query_in = "/repos/OWNNAME/REPONAME/stats/code_frequency"
+
+        # Cutoff timestamp
+        cutoff = int((datetime.now() - relativedelta(years=1)).timestamp())
 
         for repo in repolist:
-            logger.info("Looking for commit history in %s" % repo)
+            logger.info("Looking for lines of code in %s" % repo)
             repo_user, repo_name = repo.split("/")
-            gitquery = re.sub("OWNNAME", repo_user, query)
+
+            gitquery = re.sub("OWNNAME", repo_user, query_in)
             gitquery = re.sub("REPONAME", repo_name, gitquery)
 
             try:
@@ -39,15 +45,15 @@ class ActivityCommits(GitHubExtractorBase):
                 logger.warning("Warning: Could not complete '%s': %s" % (repo, error))
                 continue
 
-            for item in out:
-                # We only want weekly totals
-                if "days" in item:
-                    del item["days"]
+            # Limit data to the past year
+            out = list(filter(lambda x: x[0] > cutoff, out))
 
+            for item in out:
                 # Convert unix timestamps into standard dates (rounded to nearest week)
-                weekinfo = datetime.utcfromtimestamp(item["week"]).isocalendar()
+                weekinfo = datetime.utcfromtimestamp(item[0]).isocalendar()
                 weekstring = str(weekinfo[0]) + "-W" + str(weekinfo[1]) + "-1"
-                item["week"] = datetime.strptime(weekstring, "%Y-W%W-%w").strftime(
+                item[0] = datetime.strptime(weekstring, "%Y-W%W-%w").strftime(
                     "%Y-%m-%d"
                 )
-                self._data[self.name][repo] = out
+
+            self._data[self.name][repo] = out
