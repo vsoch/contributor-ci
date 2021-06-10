@@ -165,11 +165,14 @@ options are! For this purpose you can use ``list``:
 
     $ cci list
         creation_history: extract creation history for repositories.
-         activitycommits: extract internal repository activity and commits.
+                  topics: extract repository topics.
        repo_dependencies: extract repository dependencies.
                languages: extract languages for a repository.
+        activity_commits: extract internal repository commit activity.
                 releases: extract repository releases.
                    stars: extract repository stars.
+            member_repos: extract repositories that belong to members not within org.
+          activity_lines: extract internal repository activity via lines of code.
             dependencies: extract dependencies.
                    repos: extract repository metrics.
                    users: extract user metrics for a repository.
@@ -251,4 +254,10 @@ The following extractors are available.
      - repos
    * - stars
      - Extract repository stars
+     - repos
+   * - member_repos
+     - Extract repositories of members not associated with the organization
+     - users
+   * - topics
+     - Extract repository topics
      - repos
