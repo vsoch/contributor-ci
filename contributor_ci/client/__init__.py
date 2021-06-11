@@ -70,7 +70,7 @@ def get_parser():
 
     config = subparsers.add_parser(
         "config",
-        help="update configuration file. Use sort, edit, add, or remove to edit fields.",
+        description="update configuration file. Use sort, edit, add, or remove to edit fields.",
         formatter_class=argparse.RawTextHelpFormatter,
     )
     config.add_argument(
@@ -83,7 +83,7 @@ def get_parser():
     # See extractors
     listing = subparsers.add_parser(
         "list",
-        help="see extractors available",
+        description="see extractors available",
     )
 
     listing.add_argument(
@@ -107,7 +107,7 @@ def get_parser():
     )
 
     # Extract metrics for a repository
-    extract = subparsers.add_parser("extract", help="extract metrics for a repository.")
+    extract = subparsers.add_parser("extract", description="extract metrics for a repository.")
     extract.add_argument("method", help="extraction method")
 
     return parser

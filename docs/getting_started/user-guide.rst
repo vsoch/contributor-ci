@@ -265,3 +265,53 @@ The following extractors are available.
    * - repo_metadata
      - Combine repository metadata across repps and topics extractors
      - repos, topics
+     
+
+.. _getting_started-action:
+
+GitHub Action
+=============
+
+Contributor CI comes with a GitHub action that will be more developed as the library
+is developed. Currently, you can use it to run one or more extractors for
+a ``repos.yaml`` in your repository. For example, let's say we want to
+run all extractors:
+
+
+.. code-block:: yaml
+
+    name: Contributor CI Extract
+    on: 
+      schedule
+    
+        # Every Sunday
+        - cron: 0 0 * * 0
+
+    jobs:
+      run:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout Actions Repository
+          uses: actions/checkout@v2
+        - name: Extract
+          uses: vsoch/contributor-ci@main
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with: 
+            extract: repos
+            results_dir: .cci
+            config_file: contributor-ci.yaml
+        
+        - name: Check that results exist
+          run: tree .cci
+    
+        - name: Upload results
+          if: success()
+          uses: actions/upload-artifact@v2-preview
+          with:
+            name: cci-results
+            path: .cci
+
+
+If you save as an artifact, you can then have another repository check for them
+and save separately (coming soon).

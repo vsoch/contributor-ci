@@ -1,0 +1,25 @@
+name: GitHub Actions Test
+on: [pull_request]
+
+jobs:
+  extraction:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Actions Repository
+      uses: actions/checkout@v2
+    - name: Test GitHub Action
+      uses: ./
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with: 
+        extract: repos
+
+    - name: Check that results exist
+      run: tree .cci
+
+    - name: Upload results
+      if: success()
+      uses: actions/upload-artifact@v2-preview
+      with:
+        name: cci-results
+        path: .cci

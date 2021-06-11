@@ -1,0 +1,26 @@
+name: "contributor-ci-action"
+author: "Vanessa Sochat"
+description: "Extract repository contribution metadata."
+
+inputs:
+  results_dir:
+    description: "If doing an extraction, save results here. Defaults to .cci in $PWD"
+    required: false
+
+  extract:
+    description: "Run this kind of extraction (e.g., repos or all)"
+    required: false
+    default: repos
+ 
+  config_file:
+    description: "The contributor-ci.yaml file with organization metadata."
+    required: true
+    default: contributor-ci.yaml
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+branding:
+  icon: "link"
+  color: "blue"
