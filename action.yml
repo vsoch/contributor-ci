@@ -12,10 +12,10 @@ inputs:
     required: false
     default: repos
  
-  repos_yaml:
-    description: "The repos.yaml file with organization metadata."
+  config_file:
+    description: "The contributor-ci.yaml file with organization metadata."
     required: true
-    default: repos.yaml
+    default: contributor-ci.yaml
 
 runs:
   using: "docker"

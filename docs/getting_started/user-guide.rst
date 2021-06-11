@@ -300,7 +300,7 @@ run all extractors:
           with: 
             extract: repos
             results_dir: .cci
-            repos_yaml: repos.yaml
+            config_file: contributor-ci.yaml
         
         - name: Check that results exist
           run: tree .cci

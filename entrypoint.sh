@@ -11,8 +11,8 @@ which cci
 COMMAND="cci"
 
 # Add custom config file
-if [ ! -z "${INPUT_REPOS_YAML}" ]; then
-    COMMAND="${COMMAND} --config-file ${INPUT_REPOS_YAML}"
+if [ ! -z "${INPUT_CONFIG_FILE}" ]; then
+    COMMAND="${COMMAND} --config-file ${INPUT_CONFIG_FILE}"
 fi
 
 # custom outdir
