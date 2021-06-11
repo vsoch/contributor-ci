@@ -19,7 +19,7 @@ inputs:
 
 runs:
   using: "docker"
-  image: "docker/Dockerfile"
+  image: "Dockerfile"
 
 branding:
   icon: "link"

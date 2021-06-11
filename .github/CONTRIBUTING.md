@@ -4,7 +4,7 @@ This code is licensed under the MPL 2.0 [LICENSE](LICENSE).
 
 # Contributing
 
-When contributing to Singularity Registry Global Client, it is 
+When contributing to this project, it is 
 important to properly communicate the gist of the contribution. 
 If it is a simple code or editorial fix, simply explaining this 
 within the GitHub Pull Request (PR) will suffice. But if this is a larger 
@@ -28,13 +28,13 @@ all your interactions with the project members and users.
    reviewers.
 4. The project's default copyright and header have been included in any new
    source files.
-5. All (major) changes to Singularity Registry must be documented in
-   [docs](docs). If your PR changes a core functionality, please 
+5. All (major) changes must be documented in
+   `docs`. If your PR changes a core functionality, please 
    include clear description of the changes in your PR so that the docs 
    can be updated, or better, submit another PR to update the docs directly.
 6. If necessary, update the README.md.
 7. The pull request will be reviewed by others, and the final merge must be
-   done by the Singularity project lead, @vsoch (or approved by her).
+   done by the project lead, @vsoch (or approved by her).
 
 
 # Code of Conduct

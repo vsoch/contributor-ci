@@ -278,7 +278,7 @@ a ``repos.yaml`` in your repository. For example, let's say we want to
 run all extractors:
 
 
-.. code-block:: console
+.. code-block:: yaml
 
     name: Contributor CI Extract
     on: 
@@ -286,7 +286,6 @@ run all extractors:
     
         # Every Sunday
         - cron: 0 0 * * 0
-
 
     jobs:
       run:
