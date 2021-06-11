@@ -296,7 +296,7 @@ run all extractors:
         - name: Extract
           uses: vsoch/contributor-ci@main
           env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            CCI_GITHUB_TOKEN: ${{ secrets.CCI_GITHUB_TOKEN }}
           with: 
             extract: repos
             results_dir: .cci
@@ -313,5 +313,33 @@ run all extractors:
             path: .cci
 
 
-If you save as an artifact, you can then have another repository check for them
-and save separately (coming soon).
+Note that ``CCI_GITHUB_TOKEN`` is recommended to be a personal access token,
+which is needed for some of the queries to look at organizations. If you just
+need repository metadata, the standard ``GITHUB_TOKEN`` provided in actions
+will suffice. You can either save as an artifact as shown above, or just push directly to a branch:
+
+
+.. code-block:: yaml
+
+  - name: Push Results
+    run:
+      git config --global user.name "github-actions"
+      git config --global user.email "github-actions@users.noreply.github.com"
+      git add _cci
+
+      set +e
+      git status | grep modified
+      if [ $? -eq 0 ]; then
+          set -e
+          printf "Changes\n"
+          git commit -m "Automated push with new data results $(date '+%Y-%m-%d')" || exit 0
+          git push origin main
+      else
+        set -e
+        printf "No changes\n"
+      fi
+
+
+You can also use `a pull request action <https://github.com/vsoch/pull-request-action>`_
+to open a pull request instead. This action will be updated to better support generating
+visualizations, etc.
