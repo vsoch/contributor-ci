@@ -261,7 +261,7 @@ class ExtractorResolver:
         # Visit unvisited extractors
         for i, ikey in enumerate(self.graph[key]):
             if not seen[i]:
-                self.order_helper(i, seen, stack)
+                self.order_helper(i, seen, result)
 
         result.append(key)
 

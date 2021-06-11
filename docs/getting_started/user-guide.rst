@@ -174,6 +174,7 @@ options are! For this purpose you can use ``list``:
             member_repos: extract repositories that belong to members not within org.
           activity_lines: extract internal repository activity via lines of code.
             dependencies: extract dependencies.
+           repo_metadata: gather repository metadata from several extractors. 
                    repos: extract repository metrics.
                    users: extract user metrics for a repository.
               repo_users: extract repositories worked on for external and internal users.
@@ -261,3 +262,6 @@ The following extractors are available.
    * - topics
      - Extract repository topics
      - repos
+   * - repo_metadata
+     - Combine repository metadata across repps and topics extractors
+     - repos, topics
