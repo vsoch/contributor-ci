@@ -107,7 +107,9 @@ def get_parser():
     )
 
     # Extract metrics for a repository
-    extract = subparsers.add_parser("extract", description="extract metrics for a repository.")
+    extract = subparsers.add_parser(
+        "extract", description="extract metrics for a repository."
+    )
     extract.add_argument("method", help="extraction method")
 
     return parser

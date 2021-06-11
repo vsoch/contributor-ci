@@ -50,11 +50,6 @@ class Client:
         """
         Extract metrics given a particular method
         """
-        # TODO: we need to derive dependnecy dag here
-        # The extractor should be loaded, if there are depends on
-        # then instantiate a graph, keep adding libraries until
-        # no more depends on, then create a dag, run extractors
-        # in order of that dag.
         if method not in self.extractors:
             logger.exit("Extractor %s is not known." % method)
 
@@ -89,6 +84,7 @@ class Client:
 
             # Only run the extractor if the result does not exist
             if not extractor.exists():
+                logger.info("## RUNNING %s extractor" % name)
                 self._results[extractor.name] = extractor.extract()
                 extractor.save_json()
                 ran = True

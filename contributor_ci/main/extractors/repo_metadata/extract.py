@@ -33,7 +33,7 @@ class RepoMetadata(GitHubExtractorBase):
             data["website"] = repository["homepageUrl"]
 
             # Add topis
-            if repository["repositoryTopics"]["totalCount"] > 0:
+            if repository["repositoryTopics"]["totalCount"] > 0 and repo in topics.data:
                 topic_repo = topics.data[repo]
                 topiclist = []
                 for topic in topic_repo["repositoryTopics"]["nodes"]:
