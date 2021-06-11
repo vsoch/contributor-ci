@@ -2,8 +2,7 @@ name: GitHub Actions Test
 on: [pull_request]
 
 jobs:
-  name: Contributor CI Extraction
-  run:
+  extraction:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Actions Repository
