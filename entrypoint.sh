@@ -8,6 +8,14 @@ ls
 printf "Looking for Contributor CI install...\n"
 which cci
 
+# A bot token with more permissions is required
+
+if [ ! -z "${CCI_GITHUB_TOKEN}" ]; then
+    printf "Please export a personal access token to CCI_GITHUB_TOKEN.\n"
+    printf "You can use set the actions GITHUB_TOKEN to this variable,\n"
+    printf "but not all extractors will work."
+fi
+
 COMMAND="cci"
 
 # Add custom config file

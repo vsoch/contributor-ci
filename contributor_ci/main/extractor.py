@@ -111,7 +111,11 @@ class ExtractorBase:
         """
         self.token = os.environ.get("GITHUB_TOKEN")
         if not self.token:
-            logger.exit("GITHUB_TOKEN is required to use %s" % self.name)
+            self.token = os.environ.get("CCI_GITHUB_TOKEN")
+        if not self.token:
+            logger.exit(
+                "GITHUB_TOKEN or CCI_GITHUB_TOKEN is required to use %s" % self.name
+            )
 
     def get_results(self):
         return self._data
