@@ -14,10 +14,7 @@ under an [MIT license](.github/LICENSE-LLNL).
 
 ## TODO
 
- - finish writing GitHub extractors
- - write tests for extractors, doing a small extraction
- - when extractors done - write into GitHub action
- - set up repository to run nightly extractions
- - develop visualizations
  - contributor friendliness assessment should discover a new repo, if a file doesn't exist, open a PR
+ - tests
+ - develop visualizations
 
