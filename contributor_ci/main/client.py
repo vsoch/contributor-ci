@@ -4,8 +4,9 @@ __license__ = "MPL 2.0"
 
 
 from contributor_ci.logger import logger
+from contributor_ci.cfa import CFA
 import contributor_ci.utils as utils
-from .settings import Settings
+from .settings import Settings, SettingsBase
 from .extractor import ExtractorFinder, ExtractorResolver
 
 import os
@@ -18,13 +19,21 @@ class Client:
     Create a client to extract metrics and run Contributor CI.
     """
 
-    def __init__(self, config_file=None, outdir=None, quiet=True):
-
+    def __init__(self, config_file=None, outdir=None, quiet=True, require_config=True):
         self.quiet = quiet
         self._outdir = outdir
-        self.settings = Settings(config_file)
         self._extractors = None
         self._results = {}
+        self._init_settings(config_file, require_config)
+
+    def _init_settings(self, config_file, require_config=True):
+        """
+        Init settings.
+        """
+        if require_config:
+            self.settings = Settings(config_file)
+        else:
+            self.settings = SettingsBase()
 
     @property
     def out_dir(self):
@@ -45,6 +54,24 @@ class Client:
             self._finder = ExtractorFinder()
             self._extractors = dict(self._finder.items())
         return self._extractors
+
+    def cfa(self, repo):
+        """
+        Run the contributor friendliness assessment.
+
+        A CFA assessment comes down to assessing a repository programatically
+        for attributes of "contributor friendliness," either updating an
+        existing markdown file with metadata or generating a new one if
+        it does not exist.
+        """
+        # Create new cfa client
+        cfa = CFA(repo)
+
+        # TODO: add client argument to save or print. In the case of save,
+        # we want to save under .cci/cfa/<repository>-cfa.md
+
+        # This is a markdown file we can save/print
+        return cfa.run()
 
     def extract(self, method):
         """

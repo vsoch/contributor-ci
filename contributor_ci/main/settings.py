@@ -8,11 +8,6 @@ import contributor_ci.defaults as defaults
 import contributor_ci.main.schemas
 import contributor_ci.utils
 
-try:
-    from ruamel_yaml import YAML
-except:
-    from ruamel.yaml import YAML
-
 from datetime import datetime
 import jsonschema
 import os
@@ -51,12 +46,8 @@ class SettingsBase:
         if not os.path.exists(self.settings_file):
             logger.exit("%s does not exist." % self.settings_file)
 
-        # Default to round trip so we can save comments
-        yaml = YAML()
-
-        # Store the original settings for update as we go
-        with open(self.settings_file, "r") as fd:
-            self._settings = yaml.load(fd.read())
+        # Load the yaml file into settings
+        self._settings = contributor_ci.utils.read_yaml(self.settings_file)
 
     def add(self, key, value):
         """
@@ -157,9 +148,7 @@ class SettingsBase:
         filename = filename or self.settings_file
         if not filename:
             logger.exit("A filename is required to save to.")
-        yaml = YAML()
-        with open(filename, "w") as fd:
-            yaml.dump(self._settings, fd)
+        contributor_ci.utils.write_yaml(self._settings, filename)
 
     def __iter__(self):
         for key, value in self.__dict__.items():
