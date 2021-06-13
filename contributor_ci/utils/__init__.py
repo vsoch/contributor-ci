@@ -1,10 +1,9 @@
 from .terminal import (
     run_command,
-    check_install,
     get_installdir,
     which,
     confirm_action,
-    confirm_uninstall,
+    clone,
 )
 from .fileio import (
     copyfile,
@@ -16,7 +15,9 @@ from .fileio import (
     print_json,
     read_file,
     read_json,
+    read_yaml,
     recursive_find,
+    write_yaml,
     write_file,
     write_json,
 )

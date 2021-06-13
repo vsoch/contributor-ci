@@ -12,6 +12,11 @@ import tempfile
 import json
 from contributor_ci.logger import logger
 
+try:
+    from ruamel_yaml import YAML
+except:
+    from ruamel.yaml import YAML
+
 
 def mkdirp(dirnames):
     """
@@ -148,3 +153,23 @@ def read_file(filename, mode="r"):
 def read_json(filename, mode="r"):
     """Read a json file to a dictionary."""
     return json.loads(read_file(filename))
+
+
+def write_yaml(content, filename):
+    """
+    Save a dictionary to yaml
+    """
+    yaml = YAML()
+    with open(filename, "w") as fd:
+        yaml.dump(content, fd)
+
+
+def read_yaml(filename):
+    """
+    Read YAML from file
+    """
+    yaml = YAML()
+    # Store the original settings for update as we go
+    with open(filename, "r") as fd:
+        content = yaml.load(fd.read())
+    return content

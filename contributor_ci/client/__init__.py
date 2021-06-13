@@ -68,6 +68,9 @@ def get_parser():
     # print version and exit
     subparsers.add_parser("version", help="show software version")
 
+    cfa = subparsers.add_parser("cfa", help="Contributor Friendliness Assessment")
+    cfa.add_argument("repo", help="repository")
+
     config = subparsers.add_parser(
         "config",
         description="update configuration file. Use sort, edit, add, or remove to edit fields.",
@@ -162,6 +165,8 @@ def run():
                 helper = subparser
                 break
 
+    if args.command == "cfa":
+        from .cfa import main
     if args.command == "extract":
         from .extract import main
     if args.command == "list":

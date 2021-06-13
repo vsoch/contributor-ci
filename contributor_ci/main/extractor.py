@@ -167,12 +167,12 @@ class ExtractorBase:
 
     def get_dated_outdir(self):
         """
-        Return nested directory name with year, month, day
+        Return nested directory name with year, month, day within data
         """
         outdir = self.outdir
         # We want to organize output by date
         now = datetime.now()
-        return os.path.join(outdir, str(now.year), str(now.month), str(now.day))
+        return os.path.join(outdir, "data", str(now.year), str(now.month), str(now.day))
 
     def save_json(self):
         """

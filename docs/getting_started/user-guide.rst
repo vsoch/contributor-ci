@@ -27,6 +27,9 @@ Quick Start
     # Run an extraction
     $ cci extract repos
 
+    # Generate a contributor friendliness assessment template
+    $ cci cfa https://github.com/vsoch/salad
+    
 
 Configuration
 =============
@@ -116,7 +119,7 @@ Once you have your configuration file, and exported a GitHub `personal access to
 
 .. code-block:: console
 
-    $ cci --config-file --out-dir <command> <args>
+    $ cci --config-file <config-file> --out-dir <out-dir> <command> <args>
 
 
 .. _getting_started-commands-extract:
@@ -206,13 +209,16 @@ It is a tree organized by year, month, and day:
 .. code-block:: console
 
      $ tree .cci/
-     .cci/
-     └── 2021
-         └── 6
-             └── 3
-                 └── cci-repos.json
+    .cci/data/
+    └── 2021
+        └── 6
+            └── 13
+                └── cci-repos.json
+
+You'll notice that the extracted data is saved in a "data" subfolder.
+This is because there are other output types that can be saved here.                 
                  
-                 
+
 Extractors
 ==========
 
@@ -265,7 +271,76 @@ The following extractors are available.
    * - repo_metadata
      - Combine repository metadata across repps and topics extractors
      - repos, topics
-     
+
+
+.. _getting_started-cfa:
+
+Contributor Friendliness Assessment
+===================================
+
+The Contributor Friendliness Assessment (CFA) is an effort to identify
+aspects of a repository that can be improved to make the repository more
+contributor friendly. The assessment derives a list of criteria to assess how
+easy it is to contribute to a project. This means arriving at a project
+repository and having an easy time going from knowing nothing to opening a pull
+request, and also how well the project attracts new contributors. Generally,
+we assess the repository for:
+
+ - ``CFA-branding``: Does the project have branding?
+ - ``CFA-popularity``: How popular is the project?
+ - ``CFA-description``: Does the project have a clear description (What is it for)?
+ - ``CFA-need``: Does the project have a compelling set of use cases, or statement of need (Should I use it)? This is a fork in the visitor's decision tree, because if the answer is yes they will continue exploring, otherwise they will not.
+ - ``CFA-license``: The GitHub repository has an OSI-approved open-source license.   
+ - ``CFA-build``: Methods to build or install the software or service are clearly stated.
+ - ``CFA-examples``: Does the README.md have a quick example of usage?
+ - ``CFA-documentation``: Does the project have documentation?
+ - ``CFA-support``: Does the project make it easy to ask for help?
+ - ``CFA-developer``: Process and metadata is provided for the developer to understand and make changes.
+ - ``CFA-quality``: The code quality of the project.
+ - ``CFA-tests``: The project has testing.
+ - ``CFA-coverage``: The project reports code coverage.
+ - ``CFA-format``: The project adheres to a language specific format.
+ - ``CFA-outreach``: Is the project active at conferences or otherwise externally presented?
+ 
+Each of the items above has a more detailed description, rationale, and list
+of criteria -- some of which are automated. Currently, the assessment
+is under development so running the ``cfa`` tool for a repository:
+
+.. code-block:: console
+
+    # Generate a contributor friendliness assessment template
+    $ cci cfa https://github.com/vsoch/salad
+
+
+Will simply output the template to be filled in. This will be updated
+with automation and allowing for save in the ``.cci`` output folder, allowing
+for creating new assessments, and updating previously created assessments.
+We will also provide a GitHub action for generating assessment files 
+and opening a pull request when new repositories are found that have not
+been assessed.
+
+CFA Background
+--------------
+
+The author of CCI noticed that there are many good software projects, but
+they don't do a good job of explaining use cases. She also noticed that small
+details like branding, documentation, and ease of use were hugely important
+variables for making it easy to contribute. You can imagine a sequence of
+events (a decision tree) that models a user interaction:
+
+1. Arrive at the repository.
+2. Assess project for branding and popularity.
+3. What does it do?
+4. Does it help with a problem that I have?
+  - yes --> continue
+  - no  --> leave
+5. Does it have a license that I like?
+6. Install / build the software to try out
+7. Look for a getting started guide or examples
+8. Make changes to the repository, sometimes look for contributing guide.
+9. Run local tests, formatting, etc.
+10. Open a pull request
+
 
 .. _getting_started-action:
 

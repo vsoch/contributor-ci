@@ -1,0 +1,159 @@
+# Contributor Friendliness Assessment
+
+The goal of this assessment is to derive a list of criteria to assess how
+easy it is to contribute to a project. This means arriving at a project
+repository and having an easy time going from knowing nothing to opening a pull
+request, and also how well the project attracts new contributors. 
+This list is based on the following set of 
+steps that we suspect a contributor generally follows:
+
+1. Arrive at the repository.
+2. Assess project for branding and popularity.
+3. What does it do?
+4. Does it help with a problem that I have?
+ - yes --> continue
+ - no  --> leave
+5. Does it have a license that I like?
+6. Install / build the software to try out
+7. Look for a getting started guide or examples
+8. Make changes to the repository, sometimes look for contributing guide.
+9. Run local tests, formatting, etc.
+10. Open a pull request
+
+```yaml
+CFA-branding:
+  description: Does the project have branding?
+  rationale: Good branding can subconsciously influence how a contributor views a project (e.g., professional, fun, etc.). 
+  criteria:
+    - name: GitHub repository has logo, graphics, or other decoration
+    - name: Documentation has logo, graphics, or other decoration.
+
+CFA-popularity:
+  description: How popular is the project?
+  rationale: A new user or contributor will always glance at stars and forks to assess popularity.
+  criteria:
+    - name: Number of stars
+      method: count_stars
+    - name: Number of forks
+      method: count_forks
+      
+CFA-description:
+  description: Does the project have a clear description (What is it for)?
+  rationale: A new visitor can quickly understand the purpose of project, and functionality of the software.
+  criteria:
+    - name: GitHub repository description (modified with "edit" button) is filled in.
+      method: get_description
+    - name: The description is also provided at the top of the README.md
+    - name: Clearly states similar projects, competitors, prior art, etc.
+
+CFA-need:
+  description: | 
+      Does the project have a compelling set of use cases, or statement of need (Should I use it)? This
+      is a fork in the visitor's decision tree, because if the answer is yes they will continue exploring,
+      otherwise they will not.
+  rationale: The new user should be able to quickly know if the project could be useful for them.
+  criteria:
+    - name: Use cases are clearly stated in the README.md
+    - name: The project does not use domain-specific jargon, but if it does, it is clearly explained or offers references.
+
+CFA-license:
+  description: The GitHub repository has an OSI-approved open-source license.   
+  rationale: Contributors often won't want to contribute if they don't like the license.
+  criteria:
+    - name: The GitHub repository has a clear license
+      method: get_license
+    - name: The license is an OSI-approved license
+      method: get_license_type
+  references:
+    - https://github.com/xsdk-project/xsdk-community-policies/blob/master/package_policies/M7.md
+
+CFA-build:
+  description: Methods to build or install the software or service are clearly stated.
+  rationale: A new user or developer should be able to use the software quickly.
+  criteria:
+    - name: The documentation or README.md states how to build or install the software.
+    - name: The project uses an established build framework or strategy
+      method: get_build_framework
+    - name: Requirements or dependencies are clearly stated.
+    - name: The software can quickly output a version.
+
+CFA-examples:
+  description: does the README.md have a quick example of usage?
+  rationale: Some people learn better by seeing examples.
+  criteria:
+    - name: The README.md has one or more examples of usage.
+    - name: The documentation has an expanded set of examples (e.g., tutorials)
+
+CFA-documentation:
+  description: Does the project have documentation?
+  rationale: |
+    Documentation provides not only usage details and examples, it outlines the process for using and contributing to the software
+    and communicates to the new user that the project is professional and well-maintained.
+  criteria:
+    - name: The project has a clear link to documentation
+    - name: GitHub repository metadata has link to documentation
+      method: get_url
+    - name: Number of clicks to getting started guide (from repository)
+    - name: The documentation has a getting started guide
+    - name: The documentation has a process for contributing, or a contributor guide.
+    - name: The documentation renders in a web interface for a more user-friendly exploration.
+    - name: Documentation renders from a readable, plain-text format
+    - name: Documentation is served in version control alongside the source code.
+    - name: Different versions of documentation for various releases are available.
+
+CFA-support:
+  description: Does the project make it easy to ask for help?
+  rationale: If it's not easy to contact a developer or ask a question, it's harder to contribute.
+  criteria:
+    - name: A support contact or email is provided.
+    - name: The user is not required to join a mailing list or slack (but they may be options)
+    - name: The project has issue templates to help the user submitting a new issue.
+
+CFA-developer:
+  description: Process and metadata is provided for the developer to understand and make changes.
+  rationale: A contributor needs to be able to understand how the project has changed over time, and how to make new changes.
+  criteria:
+    - name: The project has a CHANGELOG and/or provides changes in release notes.
+    - name: The project provides a pull request template to guide the developer through steps.
+    - name: A container is provided for quick usage/interaction.
+
+CFA-quality:
+  description: The code quality of the project.
+  rationale: A commented, modular or well-structured project is easy to contribute to
+  criteria:
+    - name: Naming of variables, classes, and functions is easy to understand.
+    - name: The code is robustly commented.
+    - name: Files and directories are organized meaningfully.
+
+CFA-tests:
+  descriptions: The project has testing.
+  rationale: Tests ensure that new contributions do not break existing code.
+  criteria:
+    - name: The repository has tests.
+    - name: The documentation states how to run the tests.
+    - name: The tests are run with continuous integration.
+    - name: Tests verify successful build and installation.
+
+CFA-coverage:
+  description: The project reports code coverage
+  rationale: A well-covered project gives confidence that changes will not break existing code.
+  criteria:
+    - name: The repository reports code coverage.
+    - name: The coverage is >= 90 %
+
+CFA-format:
+  description: The project adheres to a language specific format.
+  rationale: Standard formatting provides better readability, and less ambiguity for formatting of new code.
+  criteria:
+    - name: The documentation states how to lint and check formatting.
+    - name: Tests checks for formatting.   
+
+CFA-outreach:
+  description: Is the project active at conferences or otherwise externally presented?
+  rationale: A project that is actively showcased is more likely to attract contributors.
+  criteria:
+    - name: The project has been presented at one or more conferences.
+    - name: The project has been published in a journal.
+    - name: The project has a social media handle or account.
+```
+    
