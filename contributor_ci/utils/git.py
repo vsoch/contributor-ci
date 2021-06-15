@@ -4,7 +4,6 @@ __license__ = "MPL 2.0"
 
 import os
 import re
-from git import Repo
 from .terminal import run_command
 from contributor_ci.logger import logger
 
@@ -29,7 +28,7 @@ class GitManager:
     def update_repo(self, dest):
         self.git_dir = os.path.join(dest, ".git")
         if os.path.exists(self.git_dir):
-            self.repo = Repo(self.git_dir)
+            self.repo = dest
             self.folder = dest
 
     @property
@@ -39,8 +38,7 @@ class GitManager:
         """
         if self.repo:
             name = self.run_command(
-                self.init_cmd(self.repo.working_dir)
-                + ["config", "--get", "remote.origin.url"]
+                self.init_cmd(self.repo) + ["config", "--get", "remote.origin.url"]
             ).strip()
             return (
                 re.sub("http://|https://|[.]git|github.com|git@", "", name)
@@ -130,11 +128,6 @@ class GitManager:
         """
         dest = dest or self.folder or ""
         return self.run_command(self.init_cmd(dest) + ["tag", tag])
-
-    @property
-    def tags(self):
-        """A wrapper to expose git.repo.tags"""
-        return getattr(self.repo, "tags", [])
 
     def init_cmd(self, dest):
         """

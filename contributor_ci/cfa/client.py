@@ -50,6 +50,10 @@ class CFA:
             items=result, repository=git.reponame
         )
 
+        # Clean up
+        if os.path.exists(git.folder):
+            shutil.rmtree(git.folder)
+
         # If we want to save to file
         if save_to:
             outfile = os.path.join(save_to, "cfa-%s.md" % git.reponame_flat)
