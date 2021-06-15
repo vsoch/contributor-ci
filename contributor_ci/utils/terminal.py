@@ -62,18 +62,6 @@ def run_command(cmd, sudo=False, stream=False):
     return output
 
 
-def clone(source_url):
-    """
-    Clone a repository to a temporary path
-    """
-    tmpdir = get_tmpdir()
-    try:
-        subprocess.run(["git", "clone", source_url, "."], cwd=tmpdir, check=True)
-    except sp.CalledProcessError as e:
-        logger.exit(("Failed to clone repository {}:\n{}", source_url, e))
-    return tmpdir
-
-
 def confirm_action(question, force=False):
     """confirm if the user wants to perform a certain action
 

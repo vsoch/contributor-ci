@@ -42,7 +42,8 @@ CFA-license:
   rationale: Contributors often won't want to contribute if they don't like the license.
   criteria:
     - name: The GitHub repository has a clear license
-      method: get_license
+      method: has_license
+      type: boolean
     - name: The license is an OSI-approved license
       method: get_license_type
   references:
@@ -74,6 +75,7 @@ CFA-documentation:
     - name: The project has a clear link to documentation
     - name: GitHub repository metadata has link to documentation
       method: get_url
+      type: boolean
     - name: Number of clicks to getting started guide (from repository)
     - name: The documentation has a getting started guide
     - name: The documentation has a process for contributing, or a contributor guide.

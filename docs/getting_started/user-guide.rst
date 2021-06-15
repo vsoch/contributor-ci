@@ -308,8 +308,19 @@ is under development so running the ``cfa`` tool for a repository:
 
 .. code-block:: console
 
-    # Generate a contributor friendliness assessment template
+    # Generate a contributor friendliness assessment template and print to terminal
+    $ cci cfa --terminal https://github.com/vsoch/salad
+
+    # Save to local .cci directory
     $ cci cfa https://github.com/vsoch/salad
+
+For the latter, your cfa template (with some fields populated) will be saved to 
+your .cci output directory, as specified in your config or on the command line:
+
+.. code-block:: console
+
+    $ tree .cci/cfa/
+    └── cfa-vsoch-salad.md
 
 
 Will simply output the template to be filled in. This will be updated

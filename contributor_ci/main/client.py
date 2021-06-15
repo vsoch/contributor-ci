@@ -55,7 +55,7 @@ class Client:
             self._extractors = dict(self._finder.items())
         return self._extractors
 
-    def cfa(self, repo):
+    def cfa(self, repo, save=False):
         """
         Run the contributor friendliness assessment.
 
@@ -64,14 +64,27 @@ class Client:
         existing markdown file with metadata or generating a new one if
         it does not exist.
         """
-        # Create new cfa client
-        cfa = CFA(repo)
+        cfa = CFA()
 
-        # TODO: add client argument to save or print. In the case of save,
-        # we want to save under .cci/cfa/<repository>-cfa.md
+        # Save all to the cfa output directory, if don't exist
+        outdir = os.path.join(self.out_dir, "cfa")
+        if repo == "all" or save and not os.path.exists(outdir):
+            os.makedirs(outdir)
 
-        # This is a markdown file we can save/print
-        return cfa.run()
+        # If cfa is for all repos, we require a config
+        if repo == "all":
+
+            # TODO: we will eventually want to get repos from orgs first
+            for repo in self.settings.repos:
+                logger.info("Saving %s to %s" % (repo, outdir))
+                cfa.run(repo, save_to=outdir)
+
+        elif save:
+            logger.info("Saving %s to %s" % (repo, outdir))
+            return cfa.run(repo, save_to=outdir)
+
+        else:
+            return cfa.run(repo)
 
     def extract(self, method):
         """
