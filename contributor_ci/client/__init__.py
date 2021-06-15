@@ -69,7 +69,16 @@ def get_parser():
     subparsers.add_parser("version", help="show software version")
 
     cfa = subparsers.add_parser("cfa", help="Contributor Friendliness Assessment")
-    cfa.add_argument("repo", help="repository")
+    cfa.add_argument(
+        "-t",
+        "--terminal",
+        action="store_true",
+        default=False,
+        help="print output to the terminal.",
+    )
+    cfa.add_argument(
+        "repo", help="repository or 'all' to run for a contributor-ci.yaml file."
+    )
 
     config = subparsers.add_parser(
         "config",

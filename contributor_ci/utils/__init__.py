@@ -3,7 +3,6 @@ from .terminal import (
     get_installdir,
     which,
     confirm_action,
-    clone,
 )
 from .fileio import (
     copyfile,
@@ -21,3 +20,5 @@ from .fileio import (
     write_file,
     write_json,
 )
+
+from .git import GitManager

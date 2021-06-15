@@ -8,6 +8,35 @@ from contributor_ci.main.extractor import GitHubExtractorBase
 import os
 
 
+class RepoExtractor(GitHubExtractorBase):
+    """
+    A separate extractor used by the CFA to get metadata for one repository.
+
+    If the repository
+    """
+
+    def extract(self, repo, reuse=False):
+
+        repo_owner, repo_name = repo.split("/")
+
+        # Can we re-use an older result?
+        if reuse:
+            repos = self.load_recent_dependency_file("repos")
+            if repo in repos:
+                return repos[repo]
+
+        repo_query = self.get_local_query("repos-info.gql")
+        logger.info("\nRetrieving repository info for %s" % repo)
+        try:
+            out = self.manager.queryGitHubFromFile(
+                repo_query, {"ownName": repo_owner, "repoName": repo_name}
+            )
+        except Exception as error:
+            logger.exit("Warning: Could not complete '%s'\n%s" % (repo, error))
+
+        return out["data"]["repository"]
+
+
 class Repos(GitHubExtractorBase):
 
     name = "repos"
