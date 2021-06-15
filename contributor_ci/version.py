@@ -17,6 +17,7 @@ INSTALL_REQUIRES = (
     ("Jinja2", {"min_version": None}),
     ("jsonschema", {"min_version": None}),
     ("ruamel.yaml", {"min_version": None}),
+    ("GitPython", {"min_version": "3.1.7"}),
     ("llnl-scraper", {"min_version": "0.10.0"}),
 )
 
