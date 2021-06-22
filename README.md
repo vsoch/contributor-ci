@@ -5,7 +5,10 @@
 [![GitHub Marketplace](https://img.shields.io/static/v1?label=Marketplace&message=contributor-action&color=blue?style=flat&logo=github)](https://github.com/marketplace/actions/contributor-ci-action)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/vsoch/contributor-ci-action/blob/master/LICENSE)
 
-**under development**
+Contributor CI provides tools and visualizations for analyzing contributions. You
+can read more about the library in the [documentation](https://contributor-ci.readthedocs.io/)
+
+![https://raw.githubusercontent.com/vsoch/contributor-ci/main/docs/assets/img/cci-interface.png](https://raw.githubusercontent.com/vsoch/contributor-ci/main/docs/assets/img/cci-interface.png)
 
 ## Thanks
 

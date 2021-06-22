@@ -11,7 +11,7 @@ class RepoUsers(GitHubExtractorBase):
     name = "repo_users"
     description = "extract repositories worked on for external and internal users."
     depends_on = ["users"]  # users already depends on repos
-    filenames = ["repo_users"]
+    filenames = ["internal-users", "external-users"]
 
     def extract(self):
         """

@@ -6,6 +6,7 @@ from .terminal import (
 )
 from .fileio import (
     copyfile,
+    copytree,
     get_file_hash,
     get_tmpdir,
     get_tmpfile,

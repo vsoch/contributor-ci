@@ -1,0 +1,17 @@
+name: Update Contributor CI Interface
+on:
+  schedule:
+    - cron:  '0 3 * * *'
+
+jobs:
+  extraction:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Update Data
+      uses: vsoch/contributor-ci@main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with: 
+        update: true

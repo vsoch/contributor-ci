@@ -1,1 +1,1 @@
-from .extract import RepoExtractor
+from .extract import RepoExtractor, ReposExtractor

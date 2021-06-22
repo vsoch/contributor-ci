@@ -1,10 +1,11 @@
 ---
 repository: {{ repository }}
+title: {{ repository }}
 ---
 
-# Contributor Friendliness Assessment
+# Contributor Friendliness Assessment for {{ repository }}
 
-The Contributor Friendliness Assessment makes an effort to assess a software project
+The Contributor Friendliness Assessment (CFA) makes an effort to assess a software project
 for contributor friendliness.
 
 {% for name, attrs in items.items() %}

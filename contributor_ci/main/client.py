@@ -5,6 +5,8 @@ __license__ = "MPL 2.0"
 
 from contributor_ci.logger import logger
 from contributor_ci.cfa import CFA
+from contributor_ci.main.extractors.users import UserExtractor
+
 import contributor_ci.utils as utils
 from .settings import Settings, SettingsBase
 from .extractor import ExtractorFinder, ExtractorResolver
@@ -55,6 +57,69 @@ class Client:
             self._extractors = dict(self._finder.items())
         return self._extractors
 
+    def init(self, username):
+        """
+        Create a new contributor-ci.yaml based on an org or username.
+        """
+        if not self.settings.config_file:
+            self.settings.config_file = "contributor-ci.yaml"
+
+        # If the config file specified already exists, no go
+        if os.path.exists(self.settings.config_file):
+            logger.exit(
+                "%s already exists, remove to overwrite." % self.settings.config_file
+            )
+        result = UserExtractor().extract(username)
+        # Validate and save the new config
+        self.settings._settings = result
+        self.settings.validate()
+        self.settings.save(self.settings.config_file)
+
+    def ui_generate(self, dirname, include_cfa=False):
+        """
+        Generate a new user interface.
+        """
+        dirname = os.path.abspath(dirname)
+
+        # We've already checked for a config file!
+        # If we already have a site here, no go
+        for filename in ["_config.yml", "_layouts"]:
+            if os.path.exists(os.path.join(dirname, filename)):
+                logger.exit("A CCI site already exists here!")
+
+        # Copy the entire contents of the site folder here
+        site = os.path.join(utils.get_installdir(), "site")
+        utils.copytree(site, dirname)
+        self.ui_update(dirname)
+
+    def ui_update(self, dirname):
+        """
+        Update an existing user interface.
+        """
+        dirname = os.path.abspath(dirname)
+
+        # We've already checked for a config file!
+        # If we already have a site here, no go
+        for filename in ["_config.yml", "_layouts"]:
+            if not os.path.exists(os.path.join(dirname, filename)):
+                logger.exit("Missing CCI site. Run cci ui generate.")
+
+        # Data is expected to be in cci
+        self._out_dir = os.path.join(dirname, "cci")
+        self.extract_all()
+
+        # CFA files will be here if they exist
+        outdir = os.path.join(dirname, "_cfa")
+
+        # Next, are we including CFA?
+        if not os.path.exists(outdir):
+            logger.info("%s has been updated." % dirname)
+            return
+
+        # Provide a different data directory
+        cfa = CFA(data_dir=self._out_dir)
+        cfa.run_all(outdir)
+
     def cfa(self, repo, save=False):
         """
         Run the contributor friendliness assessment.
@@ -73,11 +138,7 @@ class Client:
 
         # If cfa is for all repos, we require a config
         if repo == "all":
-
-            # TODO: we will eventually want to get repos from orgs first
-            for repo in self.settings.repos:
-                logger.info("Saving %s to %s" % (repo, outdir))
-                cfa.run(repo, save_to=outdir)
+            cfa.run_all(outdir)
 
         elif save:
             logger.info("Saving %s to %s" % (repo, outdir))
@@ -131,7 +192,7 @@ class Client:
 
         # No extractors to run?
         if not ran:
-            logger.exit("Extractor runs are up to date.", return_code=0)
+            logger.info("Extractor runs are up to date.")
 
     def __repr__(self):
         return str(self)
