@@ -14,5 +14,7 @@ and **Merged pull requests**. Critical items to know are:
 The versions coincide with releases on pip. Only major versions will be released as tags on Github.
 
 ## [0.0.x](https://github.scom/vsoch/contributor-ci/tree/master) (0.0.x)
+ - save of data in "latest" folder for consistent location for site (0.0.11)
+ - first initial release with all extractors and Contributor Friendliness Assessment (0.0.1)
  - Initial creation of project (0.0.0)
 

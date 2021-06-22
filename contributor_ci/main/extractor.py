@@ -181,14 +181,19 @@ class ExtractorBase:
         results = self.get_results()
         outdir = self.get_dated_outdir()
 
-        if not os.path.exists(outdir):
-            os.makedirs(outdir)
+        # Also save as latest results
+        latest = os.path.join(self.outdir, "data", "latest")
+
+        for dirname in [latest, outdir]:
+            if not os.path.exists(dirname):
+                os.makedirs(dirname)
 
         for name, result in results.items():
-            outfile = "cci-%s.json" % name
-            outfile = os.path.join(outdir, outfile)
+            outname = "cci-%s.json" % name
             if result:
-                contributor_ci.utils.write_json(result, outfile)
+                for dirname in [outdir, latest]:
+                    outfile = os.path.join(dirname, outname)
+                    contributor_ci.utils.write_json(result, outfile)
 
 
 class GitHubExtractorBase(ExtractorBase):
