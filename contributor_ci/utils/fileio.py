@@ -126,6 +126,8 @@ def copytree(source, destination, symlinks=False, ignore=None):
     for item in os.listdir(source):
         src = os.path.join(source, item)
         dest = os.path.join(destination, item)
+        if os.path.exists(dest):
+            continue
         if os.path.isdir(src):
             shutil.copytree(src, dest, symlinks, ignore)
         else:
