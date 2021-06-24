@@ -37,18 +37,16 @@ if [ ! -z "${INPUT_UPDATE}" ]; then
     COMMAND="${COMMAND} ui update"   
 
 # Case 2: run cfa instead
-else if [ ! -z "${INPUT_CFA}" ]; then
+elif [ ! -z "${INPUT_CFA}" ]; then
 
     COMMAND="${COMMAND} cfa ${INPUT_CFA}" 
 
 # Case 2: an extraction is desired
 else 
-
     # are we doing an extraction?
     if [ ! -z "${INPUT_EXTRACT}" ]; then
         COMMAND="${COMMAND} extract ${INPUT_EXTRACT}"
     fi
-
 fi
 
 echo "${COMMAND}"
