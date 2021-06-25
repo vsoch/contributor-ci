@@ -19,7 +19,15 @@ inputs:
   update:
     description: "Update an existing Contributor CI interface."
     required: false
- 
+
+  update_random:
+    description: Only update a random selection of N extractors. This is intended for large projects.
+    required: false
+
+  update_cfa:
+    description: "Find and generate CFAs for new repos."
+    required: false
+
   config_file:
     description: "The contributor-ci.yaml file with organization metadata."
     required: true

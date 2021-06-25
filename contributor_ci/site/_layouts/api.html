@@ -1,0 +1,7 @@
+{"data": [{% for cfa in site.cfa %}{% assign array = cfa.content | jsonify | split: "\n" %}{% assign number_checked = 0 %}{% for item in array %}{% if item contains "checked" %}{% assign number_checked = number_checked | plus:1 %}{% endif %}{% endfor %}
+            {
+                "id": "{{ cfa.title | replace:'/','-' }}",
+                "checked": {{ number_checked }},
+                "url": "{{ site.url }}{{ site.baseurl }}{{ cfa.url }}"
+            }{% if forloop.last %}{% else %},{% endif %}
+{% endfor %}]}

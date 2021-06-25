@@ -33,8 +33,16 @@ fi
 # Case 1: update is set
 if [ ! -z "${INPUT_UPDATE}" ]; then
 
-    # If we don't have files here, generate first
-    COMMAND="${COMMAND} ui update"
+    # Update CFA files?
+    if [ ! -z "${INPUT_UPDATE_CFA}" ]; then
+        COMMAND="${COMMAND} ui --cfa update"
+    else
+        COMMAND="${COMMAND} ui update"
+    fi
+
+    if [ ! -z "${INPUT_UPDATE_RANDOM}" ]; then
+        COMMAND="${COMMAND} random:${INPUT_UPDATE_RANDOM}"
+    fi
 
 # Case 2: run cfa instead
 elif [ ! -z "${INPUT_CFA}" ]; then

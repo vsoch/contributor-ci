@@ -125,7 +125,7 @@ def get_parser():
     ui.add_argument(
         "--cfa",
         dest="include_cfa",
-        help="include contributor friendliness assessments for generate.",
+        help="include contributor friendliness assessments for generate or update.",
         default=False,
         action="store_true",
     )

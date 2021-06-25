@@ -8,8 +8,7 @@ permalink: /cfa/
 
 # {{ page.title }}
 
-**contributor ci** is a <a href="https://contributor-ci.readthedocs.io" target="_blank">library for extracting contributor metadata</a> and then visualizing the data and providing an interface to keep track of project contributor friendliness. This is the visualization portal, which is under development.
-
+**contributor ci** is a <a href="https://contributor-ci.readthedocs.io" target="_blank">library for extracting contributor metadata</a> and then visualizing the data and providing an interface to keep track of project contributor friendliness. This is the visualization portal for LLNL, which is under development.
 {:.larger.text}
 
 ## The Contributor Friendliness Assessment
@@ -40,7 +39,53 @@ More specifically, the Contributor Friendliness Assessment (CFA) is an effort to
 
 Most of these assessments are currently manual, and will be automated in time. You can read more about the CFA <a href="https://contributor-ci.readthedocs.io/en/latest/getting_started/user-guide.html#contributor-friendliness-assessment" target="_blank">here</a>, and we invite you to explore the following contributor friendliness assessments
 
-{% include ordered_child_list.liquid docs=site.cfa %}
+<div class="ui bulleted link list" id="app">
+</div>
 
 This aspect of the interface is under development, so you can expect the design
 of these pages to change. Return back to the <a href="{{ site.baseurl }}/">index here</a>.
+
+<script>
+function loadJSON(path, success, error)
+{
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                if (success)
+                    success(JSON.parse(xhr.responseText));
+            } else {
+                if (error)
+                    error(xhr);
+            }
+        }
+    };
+    xhr.open("GET", path, true);
+    xhr.send();
+}
+
+
+var colors = ["#B43C3C","#BB473E","#BF5340","#BF6240","#BF6F40","#BF7540","#BF7D40","#BF8440","#BF8E40","#BF9740","#BF9F40","#BFAA40","#BFB540","#BFBB40","#AEBF40","#9FBF40","#80BF40","#59BF40"];
+var total = 47;
+
+loadJSON('{{ site.baseurl }}/api/',
+    function(data) {
+    
+      var items = [];
+      $.each(data['data'], function(i, item) {
+        console.log(item);
+        // Prepare badge images
+        var color_index = parseInt((item['checked'] / total) * colors.length)
+        var badgeColor = colors[color_index];
+        var score = (100 * (item['checked'] / total)).toFixed(2);
+        var badgeScore = Math.round(score) + "%25"
+        var badgeUrl = "https://img.shields.io/badge/software%20checklist-" + badgeScore + "-" + badgeColor.replace("#", "");
+        $("#app").append( "<a href='"+ item['url'] + "' class='item' id='" + item['id'] + "'><img style='padding-right:15px' src='"+ badgeUrl + "'>" + item['id'] + "</a>" );
+  }); 
+    
+    },
+    function(xhr) { console.error(xhr); }
+);
+
+</script>

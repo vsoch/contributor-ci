@@ -14,6 +14,7 @@ from .extractor import ExtractorFinder, ExtractorResolver
 import os
 import shutil
 import sys
+import random
 
 
 class Client:
@@ -90,12 +91,13 @@ class Client:
         # Copy the entire contents of the site folder here
         site = os.path.join(utils.get_installdir(), "site")
         utils.copytree(site, dirname)
-        self.ui_update(dirname)
+        self.ui_update(dirname, include_cfa=include_cfa)
 
-    def ui_update(self, dirname):
+    def ui_update(self, dirname, options=None, include_cfa=False):
         """
         Update an existing user interface.
         """
+        options = options or {}
         dirname = os.path.abspath(dirname)
 
         # We've already checked for a config file!
@@ -106,7 +108,12 @@ class Client:
 
         # Data is expected to be in cci
         self._out_dir = os.path.join(dirname, "cci")
-        self.extract_all()
+
+        # Do we want to extract a random number?
+        if "random" in options:
+            self.extract_random(options["random"])
+        else:
+            self.extract_all()
 
         # CFA files will be here if they exist
         outdir = os.path.join(dirname, "_cfa")
@@ -117,8 +124,9 @@ class Client:
             return
 
         # Provide a different data directory
-        cfa = CFA(data_dir=self._out_dir)
-        cfa.run_all(outdir)
+        if include_cfa:
+            cfa = CFA(data_dir=self._out_dir)
+            cfa.run_all(outdir)
 
     def cfa(self, repo, save=False):
         """
@@ -193,6 +201,20 @@ class Client:
         # No extractors to run?
         if not ran:
             logger.info("Extractor runs are up to date.")
+
+    def extract_random(self, number):
+        """
+        Extract a random selection.
+        """
+        names = list(self.extractors.keys())
+        for _ in range(number):
+
+            # Cut out early if we run out!
+            if not names:
+                return
+            choice = random.choice(names)
+            names.pop(names.index(choice))
+            self.extract(choice)
 
     def __repr__(self):
         return str(self)

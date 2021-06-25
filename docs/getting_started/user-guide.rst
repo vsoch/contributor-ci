@@ -185,12 +185,12 @@ change this:
 
     $ cci ui generate ./docs
 
-If you want to also generate files for the contributor friendliness assessment, you can add --cfa:
+Whether you are generating or updating, if you want to also generate new files 
+for the contributor friendliness assessment, you can add --cfa:
 
 .. code-block:: console
 
     $ cci ui --cfa generate
-
 
 Once you have an interface, it has a GitHub action that will run an update
 command on a nightly basis to generate new data for it. But you can also
@@ -201,10 +201,24 @@ or defaults to the present working directory.
 
     $ cci ui update
 
+And akin to generate, you can specify to generate new CFA files (default will not):
 
-For update and the GitHub action, by default, if it finds that CFA files have been generated
-for the site, it will look for new repos to add and generate for. You
-are of course free to customize the interface to your pleasing. For example,
+.. code-block:: console
+
+    $ cci ui --cfa update
+
+
+For update and the GitHub action, the default will be to run all extractors.
+However for large projects you might instead want to choose a random subset:
+
+.. code-block:: console
+
+    $ cci ui update random:4
+
+
+Once you have your interface, it's recommended to update your ``GITHUB_TOKEN``
+to a personal access token ``CCI_GITHUB_TOKEN`` that will work for all extractors.
+You are of course free to customize the interface to your pleasing. For example,
 you will likely want to change the site baseurl (the name of your repository where
 you will serve it), site metadata, and the sidebar highlight color:
 

@@ -1,0 +1,4 @@
+---
+layout: api
+permalink: /api/
+---
