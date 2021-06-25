@@ -8,7 +8,8 @@ permalink: /cfa/
 
 # {{ page.title }}
 
-**contributor ci** is a <a href="https://contributor-ci.readthedocs.io" target="_blank">library for extracting contributor metadata</a> and then visualizing the data and providing an interface to keep track of project contributor friendliness. This is the visualization portal for LLNL, which is under development.
+**contributor ci** is a <a href="https://contributor-ci.readthedocs.io" target="_blank">library for extracting contributor metadata</a> and then visualizing the data and providing an interface to keep track of project contributor friendliness. This is the visualization portal, which is under development.
+
 {:.larger.text}
 
 ## The Contributor Friendliness Assessment
