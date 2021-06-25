@@ -1133,7 +1133,7 @@ ol.ui.list li[value]:before { content: attr(value); }
 .ui.big.horizontal.list .list > .item, .ui.big.horizontal.list > .item { font-size: 1.25rem; }
 .ui.huge.horizontal.list .list > .item, .ui.huge.horizontal.list > .item { font-size: 1.5rem; }
 .ui.massive.horizontal.list .list > .item, .ui.massive.horizontal.list > .item { font-size: 2rem; }
-.ui.menu { display: -webkit-box; display: -ms-flexbox; display: flex; margin: 1rem 0; font-family: Montserrat,sans-serif; background: #fff; font-weight: 400; border: 1px solid rgba(34, 36, 38, 0.15); -webkit-box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15); box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15); min-height: 2.75em; overflow-y: scroll;}
+.ui.menu { display: -webkit-box; display: -ms-flexbox; display: flex; margin: 1rem 0; font-family: Montserrat,sans-serif; background: #fff; font-weight: 400; border: 1px solid rgba(34, 36, 38, 0.15); -webkit-box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15); box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15); min-height: 2.75em; /*overflow-y: scroll*/
 .ui.menu:after { content: ''; display: block; height: 0; clear: both; visibility: hidden; }
 .ui.menu:first-child { margin-top: 0; }
 .ui.menu:last-child { margin-bottom: 0; }
@@ -2834,11 +2834,6 @@ sup:target::before { display: inline-block; margin-top: -5rem; padding-top: 5rem
 #site-title .header .text { max-width: calc(40vw); /* not to exceed 40% of viewport width */ width: min-content; /* but shrink to the smallest width needed by content, after wrapping */ }
 @media only screen and (min-width: 768px) { #site-title .header .text { max-width: calc(60vw); /* grant up to 60% of viewport width */ width: max-content; /* and contract to the smallest width needed by content without wrapping */ } }
 #site-title .borderless.item { padding-left: calc(1.5em + 2 * ((100vw - 320px) / (1910 - 320))); padding-right: .25em; }
-/* responsive adjustments to attribution footer */
-#site-attribution .table { font-size: calc(14px + 4 * ((100vw - 320px) / (1910 - 320))); }
-#site-attribution .table .license { float: left; padding-right: .25em; margin-top: -.125em; }
-#site-attribution .table .license .larger.text { font-size: 220%; }
-#site-attribution .table .project-repo { font-size: calc(10px + 4 * ((100vw - 320px) / (1910 - 320))); }
 /* sidebar menu styling */
 #site-search { width: 12rem; margin-left: -.5rem; }
 #site-search .results { overflow: auto; }

@@ -14,3 +14,6 @@ permalink: /
 We invite you to explore the following visualizations:
 
 {% include ordered_child_list.liquid docs=site.graphs %}
+
+{% if site.cfa.size > 0 %}
+Or explore the <a href="{{ site.baseurl }}/cfa/">Contributor Friendliness Assessment</a>.{% endif %}
