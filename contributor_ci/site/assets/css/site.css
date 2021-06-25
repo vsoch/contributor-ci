@@ -2840,7 +2840,7 @@ sup:target::before { display: inline-block; margin-top: -5rem; padding-top: 5rem
 #site-attribution .table .license .larger.text { font-size: 220%; }
 #site-attribution .table .project-repo { font-size: calc(10px + 4 * ((100vw - 320px) / (1910 - 320))); }
 /* sidebar menu styling */
-#site-search { width: 14rem; margin-left: -.5rem; }
+#site-search { width: 12rem; margin-left: -.5rem; }
 #site-search .results { overflow: auto; }
 #site-search input { padding-left: 2em; }
 #sidebar-collection-indices { padding-bottom: 75vh; /* add space underneath indices so bottom-most item can scroll into view */ }
