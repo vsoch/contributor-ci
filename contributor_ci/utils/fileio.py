@@ -119,6 +119,21 @@ def copyfile(source, destination, force=True):
     return destination
 
 
+def copytree(source, destination, symlinks=False, ignore=None):
+    """
+    Copy all items from a source into an existing directory
+    """
+    for item in os.listdir(source):
+        src = os.path.join(source, item)
+        dest = os.path.join(destination, item)
+        if os.path.exists(dest):
+            continue
+        if os.path.isdir(src):
+            shutil.copytree(src, dest, symlinks, ignore)
+        else:
+            shutil.copy2(src, dest)
+
+
 def write_file(filename, content, mode="w"):
     """
     Write content to a filename

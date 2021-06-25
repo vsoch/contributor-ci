@@ -11,19 +11,17 @@ import os
 class RepoExtractor(GitHubExtractorBase):
     """
     A separate extractor used by the CFA to get metadata for one repository.
-
-    If the repository
     """
 
-    def extract(self, repo, reuse=False):
+    def extract(self, repo=None, reuse=False):
 
         repo_owner, repo_name = repo.split("/")
 
         # Can we re-use an older result?
         if reuse:
             repos = self.load_recent_dependency_file("repos")
-            if repo in repos:
-                return repos[repo]
+            if repos is not None and repo in repos.data:
+                return repos.data[repo]
 
         repo_query = self.get_local_query("repos-info.gql")
         logger.info("\nRetrieving repository info for %s" % repo)
@@ -59,6 +57,9 @@ class Repos(GitHubExtractorBase):
         # This extract only saves one result - a repos file
         self._data[self.name] = {}
 
+        # Exclude these repos
+        excludes = self.settings.exclude_repos if self.settings.exclude_repos else []
+
         # This is going to retrieve repo-level data across the orgs
         for org in self.settings.orgs:
             logger.info("\nRetrieving organization info for %s" % org)
@@ -79,7 +80,7 @@ class Repos(GitHubExtractorBase):
             for repo in out["data"]["organization"]["repositories"]["nodes"]:
 
                 # Do not add repos that are explicitly excluded!
-                if repo["nameWithOwner"] not in self.settings.exclude_repos:
+                if repo["nameWithOwner"] not in excludes:
                     self._data[self.name][repo["nameWithOwner"]] = repo
 
     def extract_repos(self):
@@ -92,7 +93,9 @@ class Repos(GitHubExtractorBase):
         for repo in self.settings.repos:
 
             # Did we already extract it via an organization?
-            if repo in self._data[self.name] or repo in self.settings.exclude_repos:
+            if repo in self._data[self.name] or (
+                self.settings.exclude_repos and repo in self.settings.exclude_repos
+            ):
                 continue
             logger.info("\nRetrieving repository info for %s" % repo)
             repo_owner, repo_name = repo.split("/")
@@ -106,3 +109,21 @@ class Repos(GitHubExtractorBase):
 
             key = out["data"]["repository"]["nameWithOwner"]
             self._data[self.name][key] = out["data"]["repository"]
+
+
+class ReposExtractor(Repos):
+    """
+    A separate extractor used by the CFA to get metadata for all repos
+    """
+
+    def extract(self, reuse=False):
+
+        # Can we re-use an older result?
+        if reuse:
+            repos = self.load_recent_dependency_file("repos")
+            if repos is not None:
+                return repos.data
+
+        self.extract_orgs()
+        self.extract_repos()
+        return self._data

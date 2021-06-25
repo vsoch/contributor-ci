@@ -1,0 +1,21 @@
+query ($pgCursor: String, $numRepos: Int!) {
+  viewer {
+        repositories(first: $numRepos, after: $pgCursor, orderBy: {field:NAME, direction:ASC},
+                     affiliations:[OWNER, ORGANIZATION_MEMBER, COLLABORATOR], 
+                     ownerAffiliations:[OWNER, ORGANIZATION_MEMBER, COLLABORATOR]) {
+          totalCount
+          nodes {
+            name
+            url
+            isPrivate
+            owner {
+              login
+            }
+            defaultBranchRef {
+              name
+            }
+          }
+          pageInfo {hasNextPage, startCursor, endCursor}
+        }
+    }
+}

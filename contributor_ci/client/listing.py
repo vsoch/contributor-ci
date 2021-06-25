@@ -8,7 +8,12 @@ import re
 
 def main(args, parser, extra, subparser):
 
-    client = Client(quiet=args.quiet, config_file=args.config_file, outdir=args.outdir)
+    client = Client(
+        quiet=args.quiet,
+        config_file=args.config_file,
+        outdir=args.outdir,
+        require_config=False,
+    )
 
     for name, extractor in client.extractors.items():
         if not args.query:

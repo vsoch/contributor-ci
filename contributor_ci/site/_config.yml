@@ -1,0 +1,75 @@
+name: "Contributor CI Software Portal"
+author: "Contributor CI <vsoch@users.noreply.github.com>"
+title: Contributor CI Software Portal
+description: "Contributor CI Software Portal"
+
+# Change this to your baseurl
+baseurl: "/contributor-ci"
+url: ""
+
+# Change this to the color you want the sidebar to highlight to
+# it defaults to a bright green to match contributor-ci
+sidebar_highlight_color: "#00d100"
+
+# Twitter username (used by jekyll-seo-tag)
+# Change this to your username
+twitter:
+  username: vsoch
+
+# GitHub Metadata -- https://github.com/jekyll/github-metadata
+repository: vsoch/contributor-ci
+plugins:
+  - jekyll-github-metadata
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-sitemap
+
+# relative path to data directory to use (defaults to latest)
+# CANNOT start with undercore or jekyll with ignore
+cci_data: cci/data/latest
+
+project:
+  name: Contributor CI
+  owner: "@vsoch"
+  repo: https://github.com/vsoch/contributor-ci
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      permalink: "/news/:year/:month/:day/:title/"
+  - scope:
+      path: ""
+      type: "cfa"
+    values:
+      layout: "page"
+
+collections:
+  graphs:
+    output: true
+    permalink: "/:collection/:path/"
+    title: Graphs
+    tab-order: 1
+  cfa:
+    output: true
+    permalink: "/:collection/:path/"
+    title: Contributor Friendliness
+    tab-order: 2
+
+highlighter: rouge
+kramdown:
+  auto_ids: true
+  footnote_backlink: "⮌"
+
+permalink: pretty
+
+exclude:
+    - CNAME
+    - Gemfile
+    - Gemfile.lock
+    - README.md
+    - Makefile
+    - build

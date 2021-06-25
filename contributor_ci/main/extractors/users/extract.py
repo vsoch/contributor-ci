@@ -7,6 +7,53 @@ from contributor_ci.logger import logger
 from scraper.github import queryManager as qm
 
 
+class UserExtractor(GitHubExtractorBase):
+    """
+    A separate extractor used by CCI init to get metadata for one user or org
+    """
+
+    def extract(self, username):
+
+        # username is provided as user:<username> or org:orgname
+        usertype, username = username.split(":", 1)
+        config = {"member_orgs": None, "orgs": set(), "repos": set()}
+
+        # If no username provided, we use running user account:
+        if usertype == "user":
+            user_query = self.get_local_query("user-info.gql")
+
+            out = self.manager.queryGitHubFromFile(
+                user_query,
+                {"numRepos": 100, "pgCursor": None},
+                paginate=True,
+                cursorVar="pgCursor",
+                keysToList=["data", "viewer", "repositories", "nodes"],
+            )
+
+            for node in out["data"]["viewer"]["repositories"]["nodes"]:
+
+                # skip private repos
+                if node["isPrivate"]:
+                    continue
+
+                if node["owner"]["login"] == username:
+                    config["repos"].add("%s/%s" % (username, node["name"]))
+                else:
+                    config["orgs"].add(node["owner"]["login"])
+
+        elif usertype == "org":
+            config["member_orgs"] = [username]
+            config["orgs"].add(username)
+        else:
+            logger.exit(
+                "%s is not a valid extraction type. Please specify user:<username> or org:<orgname>"
+            )
+
+        config["orgs"] = list(config["orgs"])
+        config["repos"] = list(config["repos"])
+        return config
+
+
 class Users(GitHubExtractorBase):
 
     name = "users"

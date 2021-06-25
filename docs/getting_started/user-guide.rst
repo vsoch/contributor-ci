@@ -21,6 +21,10 @@ Quick Start
     # Export a GitHub Personal Access Token
     $ export GITHUB_TOKEN=xxxxxxxxxxxxxx
 
+    # Generate a contributor-ci.yaml (recommended in an empty directory)
+    $ mkdir -p cci-vsoch
+    $ cci init vsoch
+
     # See metric extractors available
     $ cci list
     
@@ -101,6 +105,42 @@ This file should have the following fields:
      - vim
      - false
 
+You can make this file manually if you like (e.g., copy paste and edit
+the above) or you can use ``cci init <name>`` to initialize one, either for
+an organization or your username. To generate it for your username, you 
+can run init as follows:
+
+.. code-block:: console
+
+    $ export GITHUB_TOKEN=xxxxxxxxx
+    $ cci init user:vsoch
+
+And for an organization of interest:
+
+.. code-block:: console
+
+    $ export GITHUB_TOKEN=xxxxxxxxx
+    $ cci init org:spack
+
+
+The place where you run this init depends on your use case. If you intent
+to create a CCI interface, you might want to run this init in an empty directory.
+If you just want to run cci extract commands to generate data, it can be in
+an existing repository.
+
+.. code-block:: console
+
+    $ mkdir -p cci-vsoch
+    $ cd cci-vsoch
+    $ cci init user:vsoch
+
+
+After having your file, if you want to create an interface that visualizes data
+and contributor friendliness assessments (CFAs), you should see 
+:ref:`getting_started-commands-ui`. For basic extraction or generation
+of CFAs, you should see :ref:`getting_started-cfa`.
+
+
 .. _getting_started-commands:
 
 
@@ -122,7 +162,77 @@ Once you have your configuration file, and exported a GitHub `personal access to
     $ cci --config-file <config-file> --out-dir <out-dir> <command> <args>
 
 
-.. _getting_started-commands-extract:
+.. _getting_started-commands-ui:
+
+
+User Interface (UI)
+-------------------
+
+The most straight forward thing you might want is a user interface to explore
+your repositories. Once you have generated your contributor-ci.yaml in an
+otherwise empty directory (and it's recommended
+to edit it after generation to make sure it looks okay) creating an interface
+is as simple as running:
+
+.. code-block:: console
+
+    $ cci ui generate
+
+By default, generation happens in the directory where you run the command. To
+change this:
+
+.. code-block:: console
+
+    $ cci ui generate ./docs
+
+If you want to also generate files for the contributor friendliness assessment, you can add --cfa:
+
+.. code-block:: console
+
+    $ cci ui --cfa generate
+
+
+Once you have an interface, it has a GitHub action that will run an update
+command on a nightly basis to generate new data for it. But you can also
+run this locally or manually. It takes the same argument for a directory
+or defaults to the present working directory.
+    
+.. code-block:: console
+
+    $ cci ui update
+
+
+For update and the GitHub action, by default, if it finds that CFA files have been generated
+for the site, it will look for new repos to add and generate for. You
+are of course free to customize the interface to your pleasing. For example,
+you will likely want to change the site baseurl (the name of your repository where
+you will serve it), site metadata, and the sidebar highlight color:
+
+.. code-block:: yaml
+
+    name: "Contributor CI Software Portal"
+    author: "Contributor CI <vsoch@users.noreply.github.com>"
+    title: Contributor CI Software Portal
+    description: "Contributor CI Software Portal"
+
+    # Change this to your baseurl
+    baseurl: "/contributor-ci"
+    url: ""
+
+    # Change this to the color you want the sidebar to highlight to
+    # it defaults to a bright green to match contributor-ci
+    sidebar_highlight_color: "#00d100"
+
+
+For content, the main page is located in ``pages/index.md``, and you can delete any graph that you
+don't want to show up by deleting the corresponding file from ``_graphs``.
+If there is a graph that does not exist that you'd like, or another site
+feature (e.g., posts or other content type) please `open an issue <https://github.com/vsoch/contributor-ci>`_.
+Finally, you'll want to push your interface to GitHub and ensure that
+GitHub pages is turned on for the root or subfolder where you have your
+site.
+
+.. _getting_started-commands-config:
 
 
 Config
@@ -156,6 +266,9 @@ followed by one more entries to add or remove.
     $ cci config remove member_orgs vsoch
 
 
+.. _getting_started-commands-list:
+
+
 List
 ----
 
@@ -182,6 +295,8 @@ options are! For this purpose you can use ``list``:
                    users: extract user metrics for a repository.
               repo_users: extract repositories worked on for external and internal users.
 
+
+.. _getting_started-commands-extract:
 
 Extract
 -------
@@ -360,7 +475,7 @@ GitHub Action
 
 Contributor CI comes with a GitHub action that will be more developed as the library
 is developed. Currently, you can use it to run one or more extractors for
-a ``repos.yaml`` in your repository. For example, let's say we want to
+a ``contributor-ci.yaml`` in your repository. For example, let's say we want to
 run all extractors:
 
 
@@ -427,5 +542,36 @@ will suffice. You can either save as an artifact as shown above, or just push di
 
 
 You can also use `a pull request action <https://github.com/vsoch/pull-request-action>`_
-to open a pull request instead. This action will be updated to better support generating
-visualizations, etc.
+to open a pull request instead. The action can also support generating
+Contributor Friendliness Assessment (markdown) files. Since these might 
+warrant being populated into an interface, if you select a ``results_dir``
+here, the markdown files will explicitly be written there. If not, then
+they will be written to the default in ``.cci/cfa``.
+
+
+.. code-block:: yaml
+
+    name: Contributor CI Update Contributor Friendliness Assessment
+    on: 
+      schedule
+    
+        # Every Sunday
+        - cron: 0 0 * * 0
+
+    jobs:
+      run:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout Actions Repository
+          uses: actions/checkout@v2
+        - name: Update CFAs
+          uses: vsoch/contributor-ci@main
+          env:
+            CCI_GITHUB_TOKEN: ${{ secrets.CCI_GITHUB_TOKEN }}
+          with: 
+            cfa: true
+            results_dir: ./cfa
+            config_file: contributor-ci.yaml
+        
+        - name: Check that results exist
+          run: tree ./cfa

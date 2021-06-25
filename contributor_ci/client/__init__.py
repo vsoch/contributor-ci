@@ -13,8 +13,7 @@ import os
 
 def get_parser():
     parser = argparse.ArgumentParser(
-        description="Contributor CI",
-        formatter_class=argparse.RawTextHelpFormatter,
+        description="Contributor CI", formatter_class=argparse.RawTextHelpFormatter,
     )
 
     parser.add_argument(
@@ -67,6 +66,8 @@ def get_parser():
 
     # print version and exit
     subparsers.add_parser("version", help="show software version")
+    init = subparsers.add_parser("init", help="Create a contributor-ci.yaml.")
+    init.add_argument("username", help="GitHub user or org name to base off of.")
 
     cfa = subparsers.add_parser("cfa", help="Contributor Friendliness Assessment")
     cfa.add_argument(
@@ -86,23 +87,14 @@ def get_parser():
         formatter_class=argparse.RawTextHelpFormatter,
     )
     config.add_argument(
-        "params",
-        nargs="*",
-        help="edit, add, remove, or sort",
-        type=str,
+        "params", nargs="*", help="edit, add, remove, or sort", type=str,
     )
 
     # See extractors
-    listing = subparsers.add_parser(
-        "list",
-        description="see extractors available",
-    )
+    listing = subparsers.add_parser("list", description="see extractors available",)
 
     listing.add_argument(
-        "query",
-        help="search extractors by a query string",
-        nargs="?",
-        default=None,
+        "query", help="search extractors by a query string", nargs="?", default=None,
     )
     # Local shell with client loaded
     shell = subparsers.add_parser(
@@ -123,6 +115,20 @@ def get_parser():
         "extract", description="extract metrics for a repository."
     )
     extract.add_argument("method", help="extraction method")
+
+    # Generate an interface with extractions, a GitHub workflow to run updates,
+    # and contributor friendliness files.
+    ui = subparsers.add_parser(
+        "ui", description="generate or update a CCI user interface."
+    )
+    ui.add_argument("ui_command", help="generate or update.", nargs="*")
+    ui.add_argument(
+        "--cfa",
+        dest="include_cfa",
+        help="include contributor friendliness assessments for generate.",
+        default=False,
+        action="store_true",
+    )
 
     return parser
 
@@ -157,8 +163,7 @@ def run():
         sys.exit(0)
 
     setup_logger(
-        quiet=args.quiet,
-        debug=args.debug,
+        quiet=args.quiet, debug=args.debug,
     )
 
     # retrieve subparser (with help) from parser
@@ -178,12 +183,16 @@ def run():
         from .cfa import main
     if args.command == "extract":
         from .extract import main
+    if args.command == "init":
+        from .init import main
     if args.command == "list":
         from .listing import main
     elif args.command == "shell":
         from .shell import main
     elif args.command == "config":
         from .config import main
+    elif args.command == "ui":
+        from .ui import main
 
     # Pass on to the correct parser
     return_code = 0

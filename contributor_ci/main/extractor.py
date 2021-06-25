@@ -148,11 +148,7 @@ class ExtractorBase:
         """
         Given the name of a dependency file, find the latest.
         """
-        # Likely the path separator is /.
-        recents = glob("%s/*/*/*/cci-%s.json" % (self.outdir, name))
-        recents.sort()
-        if recents:
-            return recents.pop()
+        return os.path.join(self.outdir, "data", "latest", "cci-%s.json" % name)
 
     def get_local_query(self, path):
         """

@@ -11,6 +11,14 @@ inputs:
     description: "Run this kind of extraction (e.g., repos or all)"
     required: false
     default: repos
+
+  cfa:
+    description: "Generate contributor friendliness assessment files for a repository instead."
+    required: false
+
+  update:
+    description: "Update an existing Contributor CI interface."
+    required: false
  
   config_file:
     description: "The contributor-ci.yaml file with organization metadata."
