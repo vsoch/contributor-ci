@@ -34,7 +34,7 @@ fi
 if [ ! -z "${INPUT_UPDATE}" ]; then
 
     # If we don't have files here, generate first
-    COMMAND="${COMMAND} ui update"   
+    COMMAND="${COMMAND} ui update"
 
 # Case 2: run cfa instead
 elif [ ! -z "${INPUT_CFA}" ]; then

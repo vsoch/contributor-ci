@@ -1133,7 +1133,7 @@ ol.ui.list li[value]:before { content: attr(value); }
 .ui.big.horizontal.list .list > .item, .ui.big.horizontal.list > .item { font-size: 1.25rem; }
 .ui.huge.horizontal.list .list > .item, .ui.huge.horizontal.list > .item { font-size: 1.5rem; }
 .ui.massive.horizontal.list .list > .item, .ui.massive.horizontal.list > .item { font-size: 2rem; }
-.ui.menu { display: -webkit-box; display: -ms-flexbox; display: flex; margin: 1rem 0; font-family: Montserrat,sans-serif; background: #fff; font-weight: 400; border: 1px solid rgba(34, 36, 38, 0.15); -webkit-box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15); box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15); min-height: 2.75em; }
+.ui.menu { display: -webkit-box; display: -ms-flexbox; display: flex; margin: 1rem 0; font-family: Montserrat,sans-serif; background: #fff; font-weight: 400; border: 1px solid rgba(34, 36, 38, 0.15); -webkit-box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15); box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15); min-height: 2.75em; overflow-y: scroll;}
 .ui.menu:after { content: ''; display: block; height: 0; clear: both; visibility: hidden; }
 .ui.menu:first-child { margin-top: 0; }
 .ui.menu:last-child { margin-bottom: 0; }
