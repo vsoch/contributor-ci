@@ -8,4 +8,5 @@ global-exclude *.py[co]
 recursive-exclude .git *
 global-exclude __pycache__
 prune env
+prune contributor_ci/site/_site
 prune docs*

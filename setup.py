@@ -40,6 +40,7 @@ lookup = get_lookup()
 VERSION = lookup["__version__"]
 NAME = lookup["NAME"]
 AUTHOR = lookup["AUTHOR"]
+EMAIL = lookup["AUTHOR_EMAIL"]
 PACKAGE_URL = lookup["PACKAGE_URL"]
 KEYWORDS = lookup["KEYWORDS"]
 DESCRIPTION = lookup["DESCRIPTION"]
@@ -62,6 +63,7 @@ if __name__ == "__main__":
         version=VERSION,
         author=AUTHOR,
         maintainer=AUTHOR,
+        author_email=EMAIL,
         packages=find_packages(),
         include_package_data=True,
         zip_safe=False,
