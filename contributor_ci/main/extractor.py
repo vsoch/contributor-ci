@@ -148,7 +148,9 @@ class ExtractorBase:
         """
         Given the name of a dependency file, find the latest.
         """
-        return os.path.join(self.outdir, "data", "latest", "cci-%s.json" % name)
+        filename = os.path.join(self.outdir, "data", "latest", "cci-%s.json" % name)
+        if os.path.exists(filename):
+            return filename
 
     def get_local_query(self, path):
         """

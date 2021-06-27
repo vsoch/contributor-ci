@@ -443,6 +443,10 @@ is under development so running the ``cfa`` tool for a repository:
     # Save to local .cci directory
     $ cci cfa https://github.com/vsoch/salad
 
+    # Pipe into file
+    $ cci cfa --terminal https://github.com/LLNL/b-mpi3 > _cfa/cfa-LLNL0bmpi3.md
+
+
 For the latter, your cfa template (with some fields populated) will be saved to 
 your .cci output directory, as specified in your config or on the command line:
 
