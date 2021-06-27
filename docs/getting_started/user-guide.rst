@@ -444,7 +444,7 @@ is under development so running the ``cfa`` tool for a repository:
     $ cci cfa https://github.com/vsoch/salad
 
     # Pipe into file
-    $ cci cfa --terminal https://github.com/LLNL/b-mpi3 > _cfa/cfa-LLNL0bmpi3.md
+    $ cci cfa --terminal https://github.com/LLNL/b-mpi3 > _cfa/cfa-LLNL-b-mpi3.md
 
 
 For the latter, your cfa template (with some fields populated) will be saved to 
