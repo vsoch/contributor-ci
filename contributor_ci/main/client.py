@@ -125,7 +125,7 @@ class Client:
 
         # Provide a different data directory
         if include_cfa:
-            cfa = CFA(data_dir=self._out_dir)
+            cfa = CFA(data_dir=self.out_dir)
             cfa.run_all(outdir)
 
     def cfa(self, repo, save=False):
@@ -137,7 +137,7 @@ class Client:
         existing markdown file with metadata or generating a new one if
         it does not exist.
         """
-        cfa = CFA()
+        cfa = CFA(data_dir=self.out_dir)
 
         # Save all to the cfa output directory, if don't exist
         outdir = os.path.join(self.out_dir, "cfa")

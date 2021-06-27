@@ -48,9 +48,10 @@ class CFA:
             git.clone(repo, dest=utils.get_tmpdir())
 
         # Cut out early if the file exists
-        outfile = os.path.join(save_to, "cfa-%s.md" % git.reponame_flat)
-        if os.path.exists(outfile):
-            return utils.read_file(outfile)
+        if save_to:
+            outfile = os.path.join(save_to, "cfa-%s.md" % git.reponame_flat)
+            if os.path.exists(outfile):
+                return utils.read_file(outfile)
 
         # Generate results
         logger.info("Generating CFA for %s" % repo)
