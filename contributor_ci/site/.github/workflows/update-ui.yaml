@@ -16,3 +16,15 @@ jobs:
       with: 
         update: true
         update_random: 4
+
+    - name: Check that results exist
+      run: tree cci
+
+    - name: Push Results
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@users.noreply.github.com"
+        git add cci/*
+        git commit -m "Automated push with new data results $(date '+%Y-%m-%d')" || exit 0
+        git push origin main || exit 0
+        
