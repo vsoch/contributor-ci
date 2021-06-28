@@ -287,4 +287,7 @@ texinfo_documents = [
 
 
 def setup(app):
-    app.add_stylesheet("sphinx-argparse.css")
+    try:
+        app.add_stylesheet("sphinx-argparse.css")
+    except:
+        app.add_css_file("sphinx-argparse.css")
