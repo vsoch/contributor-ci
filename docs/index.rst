@@ -21,7 +21,7 @@ Support
 -------
 
 * For **bugs and feature requests**, please use the `issue tracker <https://github.com/vsoch/contributor-ci/issues>`_.
-* For **contributions**, visit Caliper on `Github <https://github.com/vsoch/contributor-ci>`_.
+* For **contributions**, visit Contributor CI on `Github <https://github.com/vsoch/contributor-ci>`_.
 
 ---------
 Resources

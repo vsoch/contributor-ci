@@ -5,4 +5,4 @@ Contributor CI
 
 These sections detail the internal functions for Contributor CI.
 
-.. automodule:: shpc
+.. automodule:: contributor_ci

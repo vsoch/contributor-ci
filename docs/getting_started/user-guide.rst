@@ -73,7 +73,7 @@ A simple example is shown here:
 This file should have the following fields:
 
 .. list-table:: Title
-   :widths: 25 65 10
+   :widths: 40 40 10 10
    :header-rows: 1
 
    * - Name
@@ -247,6 +247,72 @@ GitHub pages is turned on for the root or subfolder where you have your
 site.
 
 .. _getting_started-commands-config:
+
+
+Visualizations
+--------------
+
+The interface (by default) will generate the following files, each linked
+to a specific set of data and javascript files. If you want to remove any
+particular visualization from your interface, you can simply delete the markdown
+file. All javascript files are located in ``assets/js/extractors``
+
+.. list-table:: Title
+   :widths: 20 40 20 20
+   :header-rows: 1
+
+   * - Markdown
+     - Description
+     - Data
+     - Javascript
+   * - activity_commits.md
+     - A graph that shows activity across all repos (default branches) for a year (`activity commits example <https://vsoch.github.io/contributor-ci-llnl/graphs/activity_commits/#/graphs/>`_).
+     - ``activity_commits.js``
+     - ``cci-activity_commits.json`` and ``cci-repos.json``
+   * - dependencies.md
+     - A hierarchical DAG that shows depdencies (`dependencies example <https://vsoch.github.io/contributor-ci-llnl/graphs/dependencies/#/graphs/>`_).
+     - ``dependencies.js``
+     - ``cci-repo_dependencies.json`` and ``cci-dependencies.json``
+   * - languages.md
+     - A donut circle graph that shows a breakdown of repository languages (`languages example <https://vsoch.github.io/contributor-ci-llnl/graphs/languages/#/graphs/>`_).
+     - ``languages.js``
+     - ``cci-languages.json``
+   * - licenses.md
+     - A donut circle graph that shows a breakdown of repository licenses (`licenses example <https://vsoch.github.io/contributor-ci-llnl/graphs/licenses/#/graphs/>`_).
+     - ``licenses.js``
+     - ``cci-repos.json``
+   * - member_repos.md
+     - Counts of organization members and repositories (`member repos example <https://vsoch.github.io/contributor-ci-llnl/graphs/member_repos/#/graphs/>`_).
+     - ``member_repos.js``
+     - ``cci-internal-users.json`` and ``cci-member_repos.json``
+   * - pack_users.md
+     - A zoomable pack hierarchy that shows organizations and contributors (`pack users example <https://vsoch.github.io/contributor-ci-llnl/graphs/pack_users/#/graphs/>`_).
+     - ``pack_users.js``
+     - ``cci-internal-users.json`` and ``cci-external-users.json``
+   * - repos_issues.md
+     - Scatterplot showing repository closed. vs open issues (`issues example <https://vsoch.github.io/contributor-ci-llnl/graphs/repos_issues/#/graphs/>`_).
+     - ``repos_issues.js``
+     - ``cci-repos.json``
+   * - repos.md
+     - Scatterplot of repository creation history by year (`creation history example <https://vsoch.github.io/contributor-ci-llnl/graphs/repos/#/graphs/>`_).
+     - ``creation_history.js``
+     - ``cci-creation-history.json``
+   * - repos_pulls.md
+     - Scatterplot showing repository open. vs merged pull requests (`pulls example <https://vsoch.github.io/contributor-ci-llnl/graphs/repos_pulls/#/graphs/>`_).
+     - ``repos_pulls.js``
+     - ``cci-repos.json``
+   * - repos_size.md
+     - Bubble chart of repositories by popularity size (number of stars) (`size example <https://vsoch.github.io/contributor-ci-llnl/graphs/repos_size/#/graphs/>`_).
+     - ``repos_size.js``
+     - ``cci-repos.json``
+   * - star_history.md
+     - Number of stars over time (`stars example <https://vsoch.github.io/contributor-ci-llnl/graphs/star_history/#/graphs/>`_).
+     - ``star_history.js``
+     - ``cci-stars.json``
+   * - topics.md
+     - Tag map of repository topics (`topics example <https://vsoch.github.io/contributor-ci-llnl/graphs/topics/#/graphs/>`_).
+     - ``topics.js``
+     - ``cci-topics.json``
 
 
 Config
@@ -475,9 +541,7 @@ events (a decision tree) that models a user interaction:
 1. Arrive at the repository.
 2. Assess project for branding and popularity.
 3. What does it do?
-4. Does it help with a problem that I have?
-  - yes --> continue
-  - no  --> leave
+4. Does it help with a problem that I have yes --> continue, no--> leave?
 5. Does it have a license that I like?
 6. Install / build the software to try out
 7. Look for a getting started guide or examples
