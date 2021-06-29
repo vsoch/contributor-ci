@@ -16,9 +16,7 @@ all your interactions with the project members and users.
 
 ## Pull Request Process
 
-1. Bug fix PRs should be sent to both the master and development branches.
-   Feature enhancements should only be submitted against the development
-   branch.
+1. Bug fix PRs should be sent to the main branch.
 2. Follow the existing code style precedent. This does not need to be strictly
    defined as there are many thousands of lines of examples. Note the lack
    of tabs anywhere in the project, parentheses and spacing, documentation
@@ -35,7 +33,7 @@ all your interactions with the project members and users.
 6. If necessary, update the README.md.
 7. The pull request will be reviewed by others, and the final merge must be
    done by the project lead, @vsoch (or approved by her).
-
+   
 
 # Code of Conduct
 

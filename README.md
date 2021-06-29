@@ -7,6 +7,7 @@
 
 Contributor CI provides tools and visualizations for analyzing contributions. You
 can read more about the library in the [documentation](https://contributor-ci.readthedocs.io/)
+and releases are available on [pypi](https://pypi.org/project/contributor-ci).
 
 ![https://raw.githubusercontent.com/vsoch/contributor-ci/main/docs/assets/img/cci-interface.png](https://raw.githubusercontent.com/vsoch/contributor-ci/main/docs/assets/img/cci-interface.png)
 
@@ -19,5 +20,3 @@ under an [MIT license](.github/LICENSE-LLNL).
 
  - contributor friendliness assessment should discover a new repo, if a file doesn't exist, open a PR
  - tests
- - develop visualizations
-
