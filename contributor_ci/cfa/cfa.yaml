@@ -18,6 +18,12 @@ CFA-popularity:
     - name: Number of forks at least 50
       method: count_forks
       
+CFA-version-control:
+  description: Is the project version controlled?
+  rationale: Version control allows for easy collaboration and preservation of changes over time.
+  criteria:
+    - name: The project is on GitHub, GitLab, or another service that provides version control.
+      
 CFA-description:
   description: Does the project have a clear description (What is it for)?
   rationale: A new visitor can quickly understand the purpose of project, and functionality of the software.
