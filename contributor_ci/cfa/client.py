@@ -75,7 +75,7 @@ class CFA:
     def run_all(self, save_to):
         """
         Run a contributor friendliness assessment for all repos known.
-        
+
         Save to (outdir) is required here.
         """
         repos = self.get_cached_result("repos", ReposExtractor)

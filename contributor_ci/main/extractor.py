@@ -29,10 +29,11 @@ class ExtractorFinder(Mapping):
 
     _extractors = {}
 
-    def __init__(self):
+    def __init__(self, save_format=None):
         """
         Instantiate an extractor
         """
+        self.save_format = save_format
         self.collection_path = os.path.join(here, "extractors")
         self.update()
 
@@ -75,7 +76,9 @@ class ExtractorFinder(Mapping):
             # The class name means we split by underscore, capitalize, and join
             class_name = "".join([x.capitalize() for x in name.split("_")])
             module = "contributor_ci.main.extractors.%s.extract" % name
-            lookup[name] = getattr(importlib.import_module(module), class_name)()
+            lookup[name] = getattr(importlib.import_module(module), class_name)(
+                self.save_format
+            )
         return lookup
 
 
@@ -87,11 +90,15 @@ class ExtractorBase:
     filenames = []
     depends_on = []
 
-    def __init__(self):
+    def __init__(self, save_format=None):
 
         # Empty settings to be replaced by loaded settings
         self.settings = SettingsBase()
         self._data = {}
+        self.save_format = save_format or "year/month/day"
+
+        # If we change the output format, we cannot reliably date the output
+        self.force_extract = self.save_format != "year/month/day"
 
         # This should be over-ridden typically by client get_extractor
         self.outdir = os.path.abspath(".cci")
@@ -129,7 +136,11 @@ class ExtractorBase:
         for name in self.filenames:
             outfile = "cci-%s.json" % name
             outfile = os.path.join(outdir, outfile)
-            if not os.path.exists(outfile):
+            if os.path.exists(outfile) and self.force_extract:
+                logger.debug(
+                    "%s exists, but not reliably from today! Needs run." % outfile
+                )
+            elif not os.path.exists(outfile):
                 logger.debug("%s does not exist, needs run." % outfile)
                 exists = False
         return exists
@@ -168,9 +179,18 @@ class ExtractorBase:
         Return nested directory name with year, month, day within data
         """
         outdir = self.outdir
-        # We want to organize output by date
         now = datetime.now()
-        return os.path.join(outdir, "data", str(now.year), str(now.month), str(now.day))
+
+        # Organize outdir by default year/month/day or custom
+        outdir = os.path.join(outdir, "data")
+        for level in self.save_format.split("/"):
+            if level.lower() == "year":
+                outdir = os.path.join(outdir, str(now.year))
+            elif level.lower() == "month":
+                outdir = os.path.join(outdir, str(now.month))
+            elif level.lower() == "day":
+                outdir = os.path.join(outdir, str(now.day))
+        return outdir
 
     def save_json(self):
         """
@@ -195,8 +215,8 @@ class ExtractorBase:
 
 
 class GitHubExtractorBase(ExtractorBase):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         # Requires export of GITHUB_TOKEN
         self._manager = None
 

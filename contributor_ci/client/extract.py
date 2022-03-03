@@ -9,16 +9,26 @@ def main(args, parser, extra, subparser):
 
     from contributor_ci.main import Client
 
-    cli = Client(quiet=args.quiet, config_file=args.config_file, outdir=args.outdir)
+    cli = Client(
+        quiet=args.quiet,
+        config_file=args.config_file,
+        outdir=args.outdir,
+        save_format=args.save_format,
+    )
 
     # Allowed extractors
     available = list(cli.extractors) + ["all"]
-    if args.method not in available:
-        logger.exit(
-            "%s is not a valid extraction method! Choose from %s." % ",".join(available)
-        )
+    selected = args.method or []
+    for extractor in selected:
+        if extractor not in available:
+            logger.exit(
+                "%s is not a valid extraction method! Choose from %s."
+                % (extractor, ",".join(available))
+            )
 
-    if args.method == "all":
+    # Case 1: a request for ALL
+    if "all" in selected:
         cli.extract_all()
     else:
-        cli.extract(args.method)
+        for method in selected:
+            cli.extract(method)

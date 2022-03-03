@@ -13,7 +13,8 @@ import os
 
 def get_parser():
     parser = argparse.ArgumentParser(
-        description="Contributor CI", formatter_class=argparse.RawTextHelpFormatter,
+        description="Contributor CI",
+        formatter_class=argparse.RawTextHelpFormatter,
     )
 
     parser.add_argument(
@@ -87,14 +88,23 @@ def get_parser():
         formatter_class=argparse.RawTextHelpFormatter,
     )
     config.add_argument(
-        "params", nargs="*", help="edit, add, remove, or sort", type=str,
+        "params",
+        nargs="*",
+        help="edit, add, remove, or sort",
+        type=str,
     )
 
     # See extractors
-    listing = subparsers.add_parser("list", description="see extractors available",)
+    listing = subparsers.add_parser(
+        "list",
+        description="see extractors available",
+    )
 
     listing.add_argument(
-        "query", help="search extractors by a query string", nargs="?", default=None,
+        "query",
+        help="search extractors by a query string",
+        nargs="?",
+        default=None,
     )
     # Local shell with client loaded
     shell = subparsers.add_parser(
@@ -114,7 +124,12 @@ def get_parser():
     extract = subparsers.add_parser(
         "extract", description="extract metrics for a repository."
     )
-    extract.add_argument("method", help="extraction method")
+    extract.add_argument("method", help="extraction method", nargs="*")
+    extract.add_argument(
+        "--save-format",
+        dest="save_format",
+        help="use a custom save format (e.g., year/month) defaults to year/month/day",
+    )
 
     # Generate an interface with extractions, a GitHub workflow to run updates,
     # and contributor friendliness files.
@@ -163,7 +178,8 @@ def run():
         sys.exit(0)
 
     setup_logger(
-        quiet=args.quiet, debug=args.debug,
+        quiet=args.quiet,
+        debug=args.debug,
     )
 
     # retrieve subparser (with help) from parser

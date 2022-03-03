@@ -28,7 +28,10 @@ config_schema = {
     "$schema": schema_url,
     "title": "Contributor CI Config Schema",
     "type": "object",
-    "required": ["orgs", "member_orgs",],
+    "required": [
+        "orgs",
+        "member_orgs",
+    ],
     "additionalProperties": False,
     "properties": configProperties,
 }

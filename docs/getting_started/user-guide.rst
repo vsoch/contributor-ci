@@ -411,8 +411,26 @@ It is a tree organized by year, month, and day:
                 └── cci-repos.json
 
 You'll notice that the extracted data is saved in a "data" subfolder.
-This is because there are other output types that can be saved here.                 
-                 
+This is because there are other output types that can be saved here.  You can also ask
+CCI to run more than one extractor at once:
+
+
+.. code-block:: console
+
+    $ cci --out-dir _data extract repos repo_metadata topics                 
+
+Finally, if you want to change the output organization (which defaults to ``year/month/day`` under the
+data folder) you can add ``--save-format``:
+
+.. code-block:: console
+
+    $ cci --out-dir _data extract --save-format year/month repos repo_metadata topics
+    
+Note that since CCI uses its directories as a cache, changing the default save format
+will change this behavior to generate the data no matter what, as we cannot be confident when
+the data was actually generated. If you find that you don't want this behavior, it's 
+recommended to run with the default save format and then clean up or organize the data
+directory as you see fit.
 
 Extractors
 ==========
@@ -657,3 +675,23 @@ they will be written to the default in ``.cci/cfa``.
         
         - name: Check that results exist
           run: tree ./cfa
+          
+Finally, you can ask to run more than one extractor, akin to how you can on the command line!
+
+
+.. code-block:: yaml
+
+    jobs:
+      extraction:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v2
+        - name: Update Data
+          uses: vsoch/contributor-ci@main
+          env:
+            GITHUB_TOKEN: ${{ secrets.CCI_GITHUB_TOKEN }}
+          with: 
+            results_dir: _data/
+            extract: repo_metadata topics languages releases stars activity_commits activity_lines
+
