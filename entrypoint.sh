@@ -53,7 +53,11 @@ elif [ ! -z "${INPUT_CFA}" ]; then
 else 
     # are we doing an extraction?
     if [ ! -z "${INPUT_EXTRACT}" ]; then
-        COMMAND="${COMMAND} extract ${INPUT_EXTRACT}"
+        COMMAND="${COMMAND} extract"
+        if [ ! -z "${INPUT_EXTRACT_SAVE_FORMAT}" ]; then
+            COMMAND="${COMMAND} --save-format ${INPUT_EXTRACT_SAVE_FORMAT}"
+        fi
+        COMMAND="${COMMAND} ${INPUT_EXTRACT}"
     fi
 fi
 

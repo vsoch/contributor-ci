@@ -14,6 +14,7 @@ and **Merged pull requests**. Critical items to know are:
 The versions coincide with releases on pip. Only major versions will be released as tags on Github.
 
 ## [0.0.x](https://github.scom/vsoch/contributor-ci/tree/master) (0.0.x)
+ - allow more than one extractor to be provided at once (0.0.14)
  - adding version control to CFA points (0.0.13)
  - bug fixes to cci generate (0.0.12)
  - save of data in "latest" folder for consistent location for site (0.0.11)

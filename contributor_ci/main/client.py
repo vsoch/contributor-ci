@@ -22,10 +22,18 @@ class Client:
     Create a client to extract metrics and run Contributor CI.
     """
 
-    def __init__(self, config_file=None, outdir=None, quiet=True, require_config=True):
+    def __init__(
+        self,
+        config_file=None,
+        outdir=None,
+        quiet=True,
+        require_config=True,
+        save_format=None,
+    ):
         self.quiet = quiet
         self._outdir = outdir
         self._extractors = None
+        self.save_format = save_format
         self._results = {}
         self._init_settings(config_file, require_config)
 
@@ -51,10 +59,10 @@ class Client:
     @property
     def extractors(self):
         """
-        Get a list of extractirs available
+        Get a list of extractors available
         """
         if not self._extractors:
-            self._finder = ExtractorFinder()
+            self._finder = ExtractorFinder(self.save_format)
             self._extractors = dict(self._finder.items())
         return self._extractors
 
@@ -157,7 +165,8 @@ class Client:
 
     def extract(self, method):
         """
-        Extract metrics given a particular method
+        Extract metrics given a particular method. Given a particular save format,
+        e.g., year/month/day ensure we save to that structure.
         """
         if method not in self.extractors:
             logger.exit("Extractor %s is not known." % method)

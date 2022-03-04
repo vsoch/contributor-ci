@@ -33,6 +33,14 @@ inputs:
     required: true
     default: contributor-ci.yaml
 
+  extract_save_format:
+    description: |
+      Given using extract, change the default save format / structure from year/month/day to something else.
+      This will force extraction of new data since we can't reliably say when it was last done. If you need
+      to change the save format but want to use a cache, it's recommended to not change the format, but clean
+      up directories you don't need after.
+    required: false
+
 runs:
   using: "docker"
   image: "Dockerfile"

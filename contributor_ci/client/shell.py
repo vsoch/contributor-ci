@@ -34,7 +34,11 @@ def main(args, parser, extra, subparser):
 def create_client(args):
     from contributor_ci.main import Client
 
-    return Client(quiet=args.quiet, config_file=args.config_file, outdir=args.outdir,)
+    return Client(
+        quiet=args.quiet,
+        config_file=args.config_file,
+        outdir=args.outdir,
+    )
 
 
 def ipython(args):
