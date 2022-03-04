@@ -140,6 +140,7 @@ class ExtractorBase:
                 logger.debug(
                     "%s exists, but not reliably from today! Needs run." % outfile
                 )
+                exists = False
             elif not os.path.exists(outfile):
                 logger.debug("%s does not exist, needs run." % outfile)
                 exists = False
