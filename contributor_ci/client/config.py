@@ -5,6 +5,7 @@ __license__ = "MPL 2.0"
 
 from contributor_ci.main import Client
 from contributor_ci.logger import logger
+import sys
 
 
 def main(args, parser, extra, subparser):

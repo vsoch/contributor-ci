@@ -4,7 +4,6 @@ __license__ = "MPL 2.0"
 
 from contributor_ci.main.extractor import GitHubExtractorBase
 from contributor_ci.logger import logger
-from scraper.github import queryManager as qm
 
 
 class Languages(GitHubExtractorBase):

@@ -11,7 +11,6 @@ from jinja2 import Template
 from copy import deepcopy
 import os
 import shutil
-import sys
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -151,7 +150,6 @@ class CFA:
             return license.get("spdxId")
 
     def get_build_framework(self, repo):
-        meta = self.get_cached_result("repo", RepoExtractor, repo.reponame)
         pass
 
     def get_url(self, repo):

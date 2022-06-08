@@ -3,11 +3,7 @@ __copyright__ = "Copyright 2021, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
-from contributor_ci.logger import logger
 from subprocess import Popen, PIPE, STDOUT
-import subprocess
-
-from .fileio import get_tmpdir
 
 import os
 

@@ -4,7 +4,6 @@ __license__ = "MPL 2.0"
 
 from contributor_ci.main.extractor import GitHubExtractorBase
 from contributor_ci.logger import logger
-from scraper.github import queryManager as qm
 
 
 class UserExtractor(GitHubExtractorBase):
@@ -93,7 +92,6 @@ class Users(GitHubExtractorBase):
 
             # Update collective data
             for user in out["data"]["organization"]["membersWithRole"]["nodes"]:
-                userKey = user["login"]
                 self._data["internal-users"][user["login"]] = user
 
     def extract_external_users(self):
@@ -139,7 +137,6 @@ class Users(GitHubExtractorBase):
 
             # The users are found here!
             for user in out["data"]["repository"]["mentionableUsers"]["nodes"]:
-                username = user["login"]
                 if user["login"] in memberlist:
                     self.update_internal_user(user, repo)
                 else:
