@@ -76,7 +76,12 @@ if __name__ == "__main__":
         setup_requires=["pytest-runner"],
         install_requires=INSTALL_REQUIRES,
         tests_require=TESTS_REQUIRES,
-        extras_require={"all": [INSTALL_REQUIRES_ALL],},
+        extras_require={
+            "all": [INSTALL_REQUIRES_ALL],
+        },
+        dependency_links=[
+            "git+git://github.com/researchapps/scraper.git@update/python-support#egg=llnl-scraper",
+        ],
         classifiers=[
             "Intended Audience :: Science/Research",
             "Intended Audience :: Developers",

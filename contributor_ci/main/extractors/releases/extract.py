@@ -5,8 +5,6 @@ __license__ = "MPL 2.0"
 from contributor_ci.logger import logger
 from contributor_ci.main.extractor import GitHubExtractorBase
 
-import os
-
 
 class Releases(GitHubExtractorBase):
 

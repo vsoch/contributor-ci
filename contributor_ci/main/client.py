@@ -12,8 +12,6 @@ from .settings import Settings, SettingsBase
 from .extractor import ExtractorFinder, ExtractorResolver
 
 import os
-import shutil
-import sys
 import random
 
 
