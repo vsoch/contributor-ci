@@ -26,6 +26,6 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_PASS }}
       run: |
         export PATH="/usr/share/miniconda/bin:$PATH"
-        source activate shpc
+        source activate cci
         python setup.py sdist bdist_wheel
         twine upload dist/*
