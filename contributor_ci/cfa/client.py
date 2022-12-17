@@ -3,14 +3,15 @@ __copyright__ = "Copyright 2021, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
-from contributor_ci.logger import logger
-from contributor_ci.main.extractors.repos import RepoExtractor, ReposExtractor
-import contributor_ci.utils as utils
-from jinja2 import Template
-
-from copy import deepcopy
 import os
 import shutil
+from copy import deepcopy
+
+from jinja2 import Template
+
+import contributor_ci.utils as utils
+from contributor_ci.logger import logger
+from contributor_ci.main.extractors.repos import RepoExtractor, ReposExtractor
 
 here = os.path.abspath(os.path.dirname(__file__))
 

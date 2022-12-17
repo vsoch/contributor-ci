@@ -3,8 +3,8 @@
 The goal of this assessment is to derive a list of criteria to assess how
 easy it is to contribute to a project. This means arriving at a project
 repository and having an easy time going from knowing nothing to opening a pull
-request, and also how well the project attracts new contributors. 
-This list is based on the following set of 
+request, and also how well the project attracts new contributors.
+This list is based on the following set of
 steps that we suspect a contributor generally follows:
 
 1. Arrive at the repository.
@@ -23,7 +23,7 @@ steps that we suspect a contributor generally follows:
 ```yaml
 CFA-branding:
   description: Does the project have branding?
-  rationale: Good branding can subconsciously influence how a contributor views a project (e.g., professional, fun, etc.). 
+  rationale: Good branding can subconsciously influence how a contributor views a project (e.g., professional, fun, etc.).
   criteria:
     - name: GitHub repository has logo, graphics, or other decoration
     - name: Documentation has logo, graphics, or other decoration.
@@ -36,13 +36,13 @@ CFA-popularity:
       method: count_stars
     - name: Number of forks
       method: count_forks
-      
+
 CFA-version-control:
   description: Is the project version controlled?
   rationale: Version control allows for easy collaboration and preservation of changes over time.
   criteria:
     - name: The project is on GitHub, GitLab, or another service that provides version control.
-      
+
 CFA-description:
   description: Does the project have a clear description (What is it for)?
   rationale: A new visitor can quickly understand the purpose of project, and functionality of the software.
@@ -53,7 +53,7 @@ CFA-description:
     - name: Clearly states similar projects, competitors, prior art, etc.
 
 CFA-need:
-  description: | 
+  description: |
       Does the project have a compelling set of use cases, or statement of need (Should I use it)? This
       is a fork in the visitor's decision tree, because if the answer is yes they will continue exploring,
       otherwise they will not.
@@ -63,7 +63,7 @@ CFA-need:
     - name: The project does not use domain-specific jargon, but if it does, it is clearly explained or offers references.
 
 CFA-license:
-  description: The GitHub repository has an OSI-approved open-source license.   
+  description: The GitHub repository has an OSI-approved open-source license.
   rationale: Contributors often won't want to contribute if they don't like the license.
   criteria:
     - name: The GitHub repository has a clear license
@@ -152,7 +152,7 @@ CFA-format:
   rationale: Standard formatting provides better readability, and less ambiguity for formatting of new code.
   criteria:
     - name: The documentation states how to lint and check formatting.
-    - name: Tests checks for formatting.   
+    - name: Tests checks for formatting.
 
 CFA-outreach:
   description: Is the project active at conferences or otherwise externally presented?
@@ -162,4 +162,3 @@ CFA-outreach:
     - name: The project has been published in a journal.
     - name: The project has a social media handle or account.
 ```
-    

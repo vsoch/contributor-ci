@@ -3,9 +3,8 @@ __copyright__ = "Copyright 2021, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
-from subprocess import Popen, PIPE, STDOUT
-
 import os
+from subprocess import PIPE, STDOUT, Popen
 
 
 def which(software, strip_newline=True):
@@ -19,7 +18,7 @@ def which(software, strip_newline=True):
             result["message"] = result["message"].strip("\n")
         return result
 
-    except:  # FileNotFoundError
+    except Exception:  # FileNotFoundError
         return None
 
 

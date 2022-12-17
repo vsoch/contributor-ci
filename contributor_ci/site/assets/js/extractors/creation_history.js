@@ -2,7 +2,7 @@
 layout: null
 ---
 
-/* Creates line graph visualization for webpage 
+/* Creates line graph visualization for webpage
   Derived from llnl.github.io
 */
 function draw_repo_creation_history(areaID, repoNameWOwner, add_title) {
@@ -162,7 +162,7 @@ function draw_repo_creation_history(areaID, repoNameWOwner, add_title) {
             .attr('x', width / 2)
             .attr('y', 0 - margin.top / 3)
             .attr('text-anchor', 'middle')
-            .text(graphHeader);        
+            .text(graphHeader);
         }
 
         // Add y axis label
@@ -275,7 +275,7 @@ function draw_repo_creation_history(areaID, repoNameWOwner, add_title) {
 
     // Turn json obj into desired working data
     function reformatData(obj) {
- 
+
         // Build lists of timestamps
         var repos = Object.keys(obj['data']);
         var ghcreateDates = [];

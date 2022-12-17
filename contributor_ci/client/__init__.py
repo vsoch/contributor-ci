@@ -4,11 +4,12 @@ __author__ = "Vanessa Sochat"
 __copyright__ = "Copyright 2021, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
+import argparse
+import os
+import sys
+
 import contributor_ci
 from contributor_ci.logger import setup_logger
-import argparse
-import sys
-import os
 
 
 def get_parser():
@@ -197,11 +198,11 @@ def run():
 
     if args.command == "cfa":
         from .cfa import main
-    if args.command == "extract":
+    elif args.command == "extract":
         from .extract import main
-    if args.command == "init":
+    elif args.command == "init":
         from .init import main
-    if args.command == "list":
+    elif args.command == "list":
         from .listing import main
     elif args.command == "shell":
         from .shell import main

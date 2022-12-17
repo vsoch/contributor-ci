@@ -15,7 +15,7 @@ Install from Pypi
 To install from pypi:
 
 .. code:: console
-    
+
    $ pip install contributor-ci
 
 

@@ -14,6 +14,7 @@ and **Merged pull requests**. Critical items to know are:
 The versions coincide with releases on pip. Only major versions will be released as tags on Github.
 
 ## [0.0.x](https://github.scom/vsoch/contributor-ci/tree/master) (0.0.x)
+ - allow extra properties in file for other purposes (0.0.17)
  - use llnl scraper (fixed) again (0.0.16)
  - patch to fix llnl-scraper (install from branch) (0.0.15)
  - allow more than one extractor to be provided at once (0.0.14)
@@ -22,4 +23,3 @@ The versions coincide with releases on pip. Only major versions will be released
  - save of data in "latest" folder for consistent location for site (0.0.11)
  - first initial release with all extractors and Contributor Friendliness Assessment (0.0.1)
  - Initial creation of project (0.0.0)
-

@@ -52,7 +52,7 @@ function draw_force_graph(areaID, adjacentAreaID) {
             .html(function(d) {
                 return `${d.id}`;
             });
-            
+
         const linkTip = d3
             .tip()
             .attr('class', 'd3-tip')
@@ -94,7 +94,7 @@ function draw_force_graph(areaID, adjacentAreaID) {
                 .attr('transform', 'translate(40,0)')
                 .attr('stroke', '#999')
                 .attr('stroke-opacity', 0.6);
-        
+
         // Adds links
         link.selectAll('line')
             .data(links)
@@ -185,7 +185,7 @@ function draw_force_graph(areaID, adjacentAreaID) {
 
         // Data for legend
         const labels = ['Repositories with Dependencies', 'External Packages', 'Internal Packages'];
-    
+
         // Creates legend
         const legend = chart
             .append('g');
@@ -199,7 +199,7 @@ function draw_force_graph(areaID, adjacentAreaID) {
             color.forEach((d, i) => {
                 legendMap.push({ text: labels[i], color: d });
             });
-    
+
             const legendEntries = legend
                 .selectAll('g')
                 .data(legendMap)
@@ -212,7 +212,7 @@ function draw_force_graph(areaID, adjacentAreaID) {
                         const vertical = i * legendHeight - height / 2;
                         return `translate(${horizontal}, ${vertical})`;
                     });
-            
+
             // Adds rectangle for color reference
             legendEntries
                 .append('rect')
@@ -224,7 +224,7 @@ function draw_force_graph(areaID, adjacentAreaID) {
                     .style('stroke', d => {
                         return d.color;
                     });
-    
+
             // Adds legend text
             legendEntries
                 .append('text')
@@ -255,7 +255,7 @@ function draw_force_graph(areaID, adjacentAreaID) {
             .style('cursor', 'pointer')
             .on('click', () => {
                 // Since orgs do not have languages, we do not want colorByLanguage to be called
-                if (!orgSelected) { 
+                if (!orgSelected) {
                     if (colorLanguage) {
                         colorLanguage = !colorLanguage;
                         colorButtonCircle.attr('fill', 'white');
@@ -306,7 +306,7 @@ function draw_force_graph(areaID, adjacentAreaID) {
             .call(slider);
 
         let currentOption = 'normalView';
-        
+
         // What to do when the option slider is changed
         function optionChanged(o) {
             currentOption = o.name;
@@ -852,9 +852,9 @@ function draw_force_graph(areaID, adjacentAreaID) {
             }
 
             data.children.sort((a,b) => compare(a,b));
-            
+
             const root = d3.tree().size([Math.min(Math.max(data.children.length * 15, treeWidth), treeHeight - margin.top), treeWidth * 0.3])(d3.hierarchy(data));
-            
+
             const treeChart = svg
                 .append('g');
 
@@ -929,7 +929,7 @@ function draw_force_graph(areaID, adjacentAreaID) {
                     d['focused'] = true;
                     node.selectAll('circle').attr('r', d => d.focused ? 8 : 5);
                 });
-            
+
             treeNode.append('text')
                 .attr('dy', '0.31em')
                 .attr('x', d => d.children ? -6 : 6)
@@ -1034,7 +1034,7 @@ function searchForm(event) {
     $('.inGraph').attr('stroke-opacity', function(i, d) {
         return $(this).attr('id').toUpperCase().includes(document.getElementById('search').value.toUpperCase()) || ($(this).attr('language') && $(this).attr('language').toUpperCase().includes(document.getElementById('search').value.toUpperCase())) ? 1 : 0.2;
     });
-    
+
     $('.inGraph').attr('r', function(i, d) {
         return $(this).attr('id').toUpperCase().includes(document.getElementById('search').value.toUpperCase()) || ($(this).attr('language') && $(this).attr('language').toUpperCase().includes(document.getElementById('search').value.toUpperCase())) ? 6.5 : 5;
     });

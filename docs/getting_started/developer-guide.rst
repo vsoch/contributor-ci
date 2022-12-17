@@ -139,7 +139,7 @@ running this extractor, you'll see:
                 ├── cci-external-users.json
                 ├── cci-internal-users.json
                 └── cci-repos.json
-    
+
     4 directories, 4 files
 
 

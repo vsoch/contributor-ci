@@ -32,6 +32,6 @@ config_schema = {
         "orgs",
         "member_orgs",
     ],
-    "additionalProperties": False,
+    "additionalProperties": True,
     "properties": configProperties,
 }

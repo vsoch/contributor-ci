@@ -47,10 +47,10 @@ if [ ! -z "${INPUT_UPDATE}" ]; then
 # Case 2: run cfa instead
 elif [ ! -z "${INPUT_CFA}" ]; then
 
-    COMMAND="${COMMAND} cfa ${INPUT_CFA}" 
+    COMMAND="${COMMAND} cfa ${INPUT_CFA}"
 
 # Case 2: an extraction is desired
-else 
+else
     # are we doing an extraction?
     if [ ! -z "${INPUT_EXTRACT}" ]; then
         COMMAND="${COMMAND} extract"

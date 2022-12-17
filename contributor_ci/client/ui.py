@@ -2,9 +2,10 @@ __author__ = "Vanessa Sochat"
 __copyright__ = "Copyright 2021, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
-from contributor_ci.logger import logger
-import random
 import os
+import random
+
+from contributor_ci.logger import logger
 
 
 def parse_option(options, option):

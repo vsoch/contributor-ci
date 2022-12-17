@@ -3,6 +3,7 @@ __copyright__ = "Copyright 2021, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 import os
+
 import contributor_ci.utils as utils
 
 # Replacements can currently be made for the database_file and lmod_base

@@ -13,7 +13,7 @@ jobs:
       uses: vsoch/contributor-ci@main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with: 
+      with:
         update: true
         update_random: 4
 
@@ -27,4 +27,3 @@ jobs:
         git add cci/*
         git commit -m "Automated push with new data results $(date '+%Y-%m-%d')" || exit 0
         git push origin main || exit 0
-        

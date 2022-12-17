@@ -27,13 +27,13 @@ Quick Start
 
     # See metric extractors available
     $ cci list
-    
+
     # Run an extraction
     $ cci extract repos
 
     # Generate a contributor friendliness assessment template
     $ cci cfa https://github.com/vsoch/salad
-    
+
 
 Configuration
 =============
@@ -64,7 +64,7 @@ A simple example is shown here:
      - alpine-dav/ascent
      - atomconsortium/ampl
      - ceed/benchmarks
- 
+
     # do not include these repos in the assessment
     exclude_repos:
      - mfem/github-actions
@@ -107,7 +107,7 @@ This file should have the following fields:
 
 You can make this file manually if you like (e.g., copy paste and edit
 the above) or you can use ``cci init <name>`` to initialize one, either for
-an organization or your username. To generate it for your username, you 
+an organization or your username. To generate it for your username, you
 can run init as follows:
 
 .. code-block:: console
@@ -136,7 +136,7 @@ an existing repository.
 
 
 After having your file, if you want to create an interface that visualizes data
-and contributor friendliness assessments (CFAs), you should see 
+and contributor friendliness assessments (CFAs), you should see
 :ref:`getting_started-commands-ui`. For basic extraction or generation
 of CFAs, you should see :ref:`getting_started-cfa`.
 
@@ -185,7 +185,7 @@ change this:
 
     $ cci ui generate ./docs
 
-Whether you are generating or updating, if you want to also generate new files 
+Whether you are generating or updating, if you want to also generate new files
 for the contributor friendliness assessment, you can add --cfa:
 
 .. code-block:: console
@@ -196,7 +196,7 @@ Once you have an interface, it has a GitHub action that will run an update
 command on a nightly basis to generate new data for it. But you can also
 run this locally or manually. It takes the same argument for a directory
 or defaults to the present working directory.
-    
+
 .. code-block:: console
 
     $ cci ui update
@@ -270,7 +270,7 @@ file. All javascript files are located in ``assets/js/extractors``
      - ``activity_commits.js``
      - ``cci-activity_commits.json`` and ``cci-repos.json``
    * - dependencies.md
-     - A hierarchical DAG that shows depdencies (`dependencies example <https://vsoch.github.io/contributor-ci-llnl/graphs/dependencies/#/graphs/>`_).
+     - A hierarchical DAG that shows dependencies (`dependencies example <https://vsoch.github.io/contributor-ci-llnl/graphs/dependencies/#/graphs/>`_).
      - ``dependencies.js``
      - ``cci-repo_dependencies.json`` and ``cci-dependencies.json``
    * - languages.md
@@ -324,7 +324,7 @@ the file ``contributor-ci.yaml``. First, to edit the file, you can do:
 .. code-block:: console
 
     $ cci config edit
-    
+
 By default, the editor chosen is vim. If you add an ``editor`` field
 to that same file, you can choose an editor of your choice.
 You can also quickly sort your file in the case that you made a bunch
@@ -370,7 +370,7 @@ options are! For this purpose you can use ``list``:
             member_repos: extract repositories that belong to members not within org.
           activity_lines: extract internal repository activity via lines of code.
             dependencies: extract dependencies.
-           repo_metadata: gather repository metadata from several extractors. 
+           repo_metadata: gather repository metadata from several extractors.
                    repos: extract repository metrics.
                    users: extract user metrics for a repository.
               repo_users: extract repositories worked on for external and internal users.
@@ -383,7 +383,7 @@ Extract
 
 You next likely want to run an extractor. The default output directory used
 will be a directory named ``.cci`` for "contributor CI" in the present working
-directory. 
+directory.
 
 .. code-block:: console
 
@@ -417,7 +417,7 @@ CCI to run more than one extractor at once:
 
 .. code-block:: console
 
-    $ cci --out-dir _data extract repos repo_metadata topics                 
+    $ cci --out-dir _data extract repos repo_metadata topics
 
 Finally, if you want to change the output organization (which defaults to ``year/month/day`` under the
 data folder) you can add ``--save-format``:
@@ -425,10 +425,10 @@ data folder) you can add ``--save-format``:
 .. code-block:: console
 
     $ cci --out-dir _data extract --save-format year/month repos repo_metadata topics
-    
+
 Note that since CCI uses its directories as a cache, changing the default save format
 will change this behavior to generate the data no matter what, as we cannot be confident when
-the data was actually generated. If you find that you don't want this behavior, it's 
+the data was actually generated. If you find that you don't want this behavior, it's
 recommended to run with the default save format and then clean up or organize the data
 directory as you see fit.
 
@@ -450,7 +450,7 @@ The following extractors are available.
      - none
    * - users
      - Extract internal and external contributors lists
-     - repos  
+     - repos
    * - repo_dependencies
      - Extract repository dependencies
      - repos
@@ -468,7 +468,7 @@ The following extractors are available.
      - repos
    * - repo_users
      - Extract users and repositories contributed to (internal and external)
-     - users    
+     - users
    * - creation_history
      - Extract creation history (first commit) of repositories
      - repos
@@ -503,7 +503,7 @@ we assess the repository for:
  - ``CFA-popularity``: How popular is the project?
  - ``CFA-description``: Does the project have a clear description (What is it for)?
  - ``CFA-need``: Does the project have a compelling set of use cases, or statement of need (Should I use it)? This is a fork in the visitor's decision tree, because if the answer is yes they will continue exploring, otherwise they will not.
- - ``CFA-license``: The GitHub repository has an OSI-approved open-source license.   
+ - ``CFA-license``: The GitHub repository has an OSI-approved open-source license.
  - ``CFA-build``: Methods to build or install the software or service are clearly stated.
  - ``CFA-examples``: Does the README.md have a quick example of usage?
  - ``CFA-documentation``: Does the project have documentation?
@@ -514,7 +514,7 @@ we assess the repository for:
  - ``CFA-coverage``: The project reports code coverage.
  - ``CFA-format``: The project adheres to a language specific format.
  - ``CFA-outreach``: Is the project active at conferences or otherwise externally presented?
- 
+
 Each of the items above has a more detailed description, rationale, and list
 of criteria -- some of which are automated. Currently, the assessment
 is under development so running the ``cfa`` tool for a repository:
@@ -531,7 +531,7 @@ is under development so running the ``cfa`` tool for a repository:
     $ cci cfa --terminal https://github.com/LLNL/b-mpi3 > _cfa/cfa-LLNL-b-mpi3.md
 
 
-For the latter, your cfa template (with some fields populated) will be saved to 
+For the latter, your cfa template (with some fields populated) will be saved to
 your .cci output directory, as specified in your config or on the command line:
 
 .. code-block:: console
@@ -543,7 +543,7 @@ your .cci output directory, as specified in your config or on the command line:
 Will simply output the template to be filled in. This will be updated
 with automation and allowing for save in the ``.cci`` output folder, allowing
 for creating new assessments, and updating previously created assessments.
-We will also provide a GitHub action for generating assessment files 
+We will also provide a GitHub action for generating assessment files
 and opening a pull request when new repositories are found that have not
 been assessed.
 
@@ -582,9 +582,9 @@ run all extractors:
 .. code-block:: yaml
 
     name: Contributor CI Extract
-    on: 
+    on:
       schedule
-    
+
         # Every Sunday
         - cron: 0 0 * * 0
 
@@ -598,14 +598,14 @@ run all extractors:
           uses: vsoch/contributor-ci@main
           env:
             CCI_GITHUB_TOKEN: ${{ secrets.CCI_GITHUB_TOKEN }}
-          with: 
+          with:
             extract: repos
             results_dir: .cci
             config_file: contributor-ci.yaml
-        
+
         - name: Check that results exist
           run: tree .cci
-    
+
         - name: Upload results
           if: success()
           uses: actions/upload-artifact@v2-preview
@@ -643,7 +643,7 @@ will suffice. You can either save as an artifact as shown above, or just push di
 
 You can also use `a pull request action <https://github.com/vsoch/pull-request-action>`_
 to open a pull request instead. The action can also support generating
-Contributor Friendliness Assessment (markdown) files. Since these might 
+Contributor Friendliness Assessment (markdown) files. Since these might
 warrant being populated into an interface, if you select a ``results_dir``
 here, the markdown files will explicitly be written there. If not, then
 they will be written to the default in ``.cci/cfa``.
@@ -652,9 +652,9 @@ they will be written to the default in ``.cci/cfa``.
 .. code-block:: yaml
 
     name: Contributor CI Update Contributor Friendliness Assessment
-    on: 
+    on:
       schedule
-    
+
         # Every Sunday
         - cron: 0 0 * * 0
 
@@ -668,14 +668,14 @@ they will be written to the default in ``.cci/cfa``.
           uses: vsoch/contributor-ci@main
           env:
             CCI_GITHUB_TOKEN: ${{ secrets.CCI_GITHUB_TOKEN }}
-          with: 
+          with:
             cfa: true
             results_dir: ./cfa
             config_file: contributor-ci.yaml
-        
+
         - name: Check that results exist
           run: tree ./cfa
-          
+
 Finally, you can ask to run more than one extractor, akin to how you can on the command line!
 
 
@@ -691,7 +691,6 @@ Finally, you can ask to run more than one extractor, akin to how you can on the 
           uses: vsoch/contributor-ci@main
           env:
             GITHUB_TOKEN: ${{ secrets.CCI_GITHUB_TOKEN }}
-          with: 
+          with:
             results_dir: _data/
             extract: repo_metadata topics languages releases stars activity_commits activity_lines
-

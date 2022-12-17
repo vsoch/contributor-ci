@@ -3,14 +3,15 @@ __copyright__ = "Copyright 2021, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
-from contributor_ci.logger import logger
+import os
+from datetime import datetime
+
+import jsonschema
+
 import contributor_ci.defaults as defaults
 import contributor_ci.main.schemas
 import contributor_ci.utils
-
-from datetime import datetime
-import jsonschema
-import os
+from contributor_ci.logger import logger
 
 
 class SettingsBase:

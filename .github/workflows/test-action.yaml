@@ -11,7 +11,7 @@ jobs:
       uses: ./
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with: 
+      with:
         extract: repos
 
     - name: Check that results exist
