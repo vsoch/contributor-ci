@@ -3,20 +3,19 @@ __copyright__ = "Copyright 2021, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
-import contributor_ci.utils
-from collections.abc import Mapping
-from contributor_ci.logger import logger
-from contributor_ci.main.settings import SettingsBase
-
+import abc
+import importlib
+import inspect
+import os
 from collections import defaultdict
+from collections.abc import Mapping
 from datetime import datetime
 
 from scraper.github import queryManager as qm
-import importlib
 
-import inspect
-import abc
-import os
+import contributor_ci.utils
+from contributor_ci.logger import logger
+from contributor_ci.main.settings import SettingsBase
 
 here = os.path.abspath(os.path.dirname(__file__))
 

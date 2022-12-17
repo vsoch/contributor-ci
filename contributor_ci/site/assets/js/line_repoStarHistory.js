@@ -172,7 +172,7 @@ function draw_line_repoStarHistory(areaID, repoNameWOwner) {
             .selectAll('text')
             .attr('transform', 'rotate(12)')
             .attr('text-anchor', 'start');
-        
+
         var start = -1;
         var current = -1;
         var past = -1;

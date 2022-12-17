@@ -3,16 +3,16 @@ __copyright__ = "Copyright 2021, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
-from contributor_ci.logger import logger
-from contributor_ci.cfa import CFA
-from contributor_ci.main.extractors.users import UserExtractor
-
-import contributor_ci.utils as utils
-from .settings import Settings, SettingsBase
-from .extractor import ExtractorFinder, ExtractorResolver
-
 import os
 import random
+
+import contributor_ci.utils as utils
+from contributor_ci.cfa import CFA
+from contributor_ci.logger import logger
+from contributor_ci.main.extractors.users import UserExtractor
+
+from .extractor import ExtractorFinder, ExtractorResolver
+from .settings import Settings, SettingsBase
 
 
 class Client:

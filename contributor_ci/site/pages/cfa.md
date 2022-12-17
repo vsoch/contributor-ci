@@ -71,7 +71,7 @@ var total = 47;
 
 loadJSON('{{ site.baseurl }}/api/',
     function(data) {
-    
+
       var items = [];
       $.each(data['data'], function(i, item) {
         console.log(item);
@@ -82,8 +82,8 @@ loadJSON('{{ site.baseurl }}/api/',
         var badgeScore = Math.round(score) + "%25"
         var badgeUrl = "https://img.shields.io/badge/software%20checklist-" + badgeScore + "-" + badgeColor.replace("#", "");
         $("#app").append( "<a href='"+ item['url'] + "' class='item' id='" + item['id'] + "'><img style='padding-right:15px' src='"+ badgeUrl + "'>" + item['id'] + "</a>" );
-  }); 
-    
+  });
+
     },
     function(xhr) { console.error(xhr); }
 );

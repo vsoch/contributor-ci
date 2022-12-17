@@ -112,7 +112,7 @@ function draw_pie_languages(areaID, repoNameWOwner) {
             .attr('text-anchor', 'start');
 
         const textArray = [{ text: graphHeader, class: 'graphtitle', x: 0, y: -50 }];
-        
+
         // Add title
         const titles = chart
             .append('g')
@@ -151,7 +151,7 @@ function draw_pie_languages(areaID, repoNameWOwner) {
         function labelVisible(d) {
             return (d.endAngle - d.startAngle) > 0.06;
         }
-    
+
         function labelTransform(d) {
             const x = (d.endAngle + d.startAngle) / 2 * 180 / Math.PI;
             const y = radius - donutWidth / 2;

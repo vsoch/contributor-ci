@@ -2,8 +2,8 @@ __author__ = "Vanessa Sochat"
 __copyright__ = "Copyright 2021, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
-from contributor_ci.main.extractor import GitHubExtractorBase
 from contributor_ci.logger import logger
+from contributor_ci.main.extractor import GitHubExtractorBase
 
 
 class RepoUsers(GitHubExtractorBase):
@@ -25,7 +25,7 @@ class RepoUsers(GitHubExtractorBase):
         # Load in dependency files
         repos = self.load_dependency_file("repos")
         internal = self.load_dependency_file("internal-users")
-        external = self.load_dependency_file("external-users")
+        # external = self.load_dependency_file("external-users")
 
         repolist = sorted(repos.data.keys())
         memberlist = sorted(internal.data.keys())

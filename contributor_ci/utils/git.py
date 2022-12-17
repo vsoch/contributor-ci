@@ -4,8 +4,10 @@ __license__ = "MPL 2.0"
 
 import os
 import re
-from .terminal import run_command
+
 from contributor_ci.logger import logger
+
+from .terminal import run_command
 
 
 class GitManager:

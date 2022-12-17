@@ -10,8 +10,9 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys
 import os
+import sys
+
 from recommonmark.parser import CommonMarkParser
 
 source_parsers = {".md": CommonMarkParser}
@@ -21,6 +22,8 @@ source_parsers = {".md": CommonMarkParser}
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath("../"))
+
+from contributor_ci import version  # noqa
 
 # -- General configuration ------------------------------------------------
 
@@ -57,8 +60,6 @@ master_doc = "index"
 # General information about the project.
 project = "Contributor CI"
 copyright = "2021, Vanessa Sochat"
-
-from contributor_ci import version
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -287,7 +288,4 @@ texinfo_documents = [
 
 
 def setup(app):
-    try:
-        app.add_stylesheet("sphinx-argparse.css")
-    except:
-        app.add_css_file("sphinx-argparse.css")
+    app.add_css_file("sphinx-argparse.css")

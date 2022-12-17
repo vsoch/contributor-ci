@@ -1,9 +1,3 @@
-from .terminal import (
-    run_command,
-    get_installdir,
-    which,
-    confirm_action,
-)
 from .fileio import (
     copyfile,
     copytree,
@@ -17,9 +11,9 @@ from .fileio import (
     read_json,
     read_yaml,
     recursive_find,
-    write_yaml,
     write_file,
     write_json,
+    write_yaml,
 )
-
 from .git import GitManager
+from .terminal import confirm_action, get_installdir, run_command, which

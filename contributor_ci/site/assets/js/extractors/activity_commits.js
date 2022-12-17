@@ -90,7 +90,7 @@ function draw_line_repo_activity(areaID, repoNameWOwner) {
                 }
                 return '<sub>[Week of ' + formatTime(d.date) + ']</sub>' + '<br>' + d.value + repos;
             });
-        
+
         var pieTip = d3
             .tip()
             .attr('class', 'd3-tip')
@@ -107,7 +107,7 @@ function draw_line_repo_activity(areaID, repoNameWOwner) {
         // Christmas
         var dXmas = '12-25';
 
-        function update(x, y) {    
+        function update(x, y) {
             chart.selectAll('g').remove();
 
             var xAxis = d3.axisBottom().scale(x);
@@ -269,7 +269,7 @@ function draw_line_repo_activity(areaID, repoNameWOwner) {
 
             // Colors used for coloring the pie chart
             const colors = d3.scaleSequential(d3.interpolate('lightblue', 'white')).domain([0, root.descendants().length]);
-            
+
             // Equivalent of chart but for the pie chart
             const pieGroup = chart
                 .append('g')

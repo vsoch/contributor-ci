@@ -2,19 +2,19 @@ __author__ = "Vanessa Sochat"
 __copyright__ = "Copyright 2021, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
-import hashlib
 import errno
+import hashlib
+import json
 import os
 import re
 import shutil
 import tempfile
 
-import json
 from contributor_ci.logger import logger
 
 try:
     from ruamel_yaml import YAML
-except:
+except ImportError:
     from ruamel.yaml import YAML
 
 

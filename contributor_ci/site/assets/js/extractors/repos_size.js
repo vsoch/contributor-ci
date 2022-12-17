@@ -44,13 +44,13 @@ function draw_cluster(areaID) {
         const margin = { top: stdMargin.top, right: stdMargin.right, bottom: stdMargin.bottom, left: stdMargin.left },
             width = 500,
             height = 500;
-        
+
         const chart = d3
             .select(areaID)
                 .attr('width', width)
                 .attr('height', height)
                 .append('g');
-        
+
         const pack = (data, starWeight=1, forkWeight=0, contributorWeight=0) => d3.pack()
             .size([width, height])
             .padding(2)
@@ -96,7 +96,7 @@ function draw_cluster(areaID) {
                 .on('mouseover', tip.show)
                 .on('mouseout', tip.hide);
         }
-        
+
         update(1, 0, 0);
 
         const label = chart.append('g');
@@ -114,7 +114,7 @@ function draw_cluster(areaID) {
                     .attr('transform', d => `translate(${d.x},${d.y})`)
                     .attr('pointer-events', 'none')
                     .text(d => d.data.name);
-            
+
             labelText.nodes().forEach(node => {
                 node.setAttribute('font-size', Math.floor(10 * node.getAttribute('radius') * 2 / (node.getComputedTextLength() + 5)) + 'px')
             });

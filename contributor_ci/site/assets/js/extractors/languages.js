@@ -63,7 +63,7 @@ function draw_pie_languages(areaID) {
             .sort(null);
 
         const pathGroup = chart.append('g');
-    
+
         var path = pathGroup
             .selectAll('path')
             .data(pie(data[2]))
@@ -97,7 +97,7 @@ function draw_pie_languages(areaID) {
                 .on('mouseover', tip.show)
                 .on('mouseout', tip.hide)
                 .on('click', clicked);
-            
+
             label
                 .selectAll('text')
                     .data(pieData)
@@ -158,7 +158,7 @@ function draw_pie_languages(areaID) {
         }
 
         const textArray = [{ text: graphHeader, size: 18, weight: 'bold', id: 'mainTitle', x: 0, y: 0 }, { text: 'by bytes', size: 18, weight: 'normal', id: 'subTitle', x: 0, y: '1em' }];
-        
+
         // Add title
         const titles = chart
             .append('g')
@@ -181,7 +181,7 @@ function draw_pie_languages(areaID) {
                 .attr('pointer-events', 'none')
                 .attr('text-anchor', 'middle')
                 .style('user-select', 'none');
-        
+
         label
             .selectAll('text')
                 .data(pie(data[2]))
@@ -207,7 +207,7 @@ function draw_pie_languages(areaID) {
         function labelVisible(d) {
             return (d.endAngle - d.startAngle) > 0.07;
         }
-    
+
         function labelTransform(d) {
             const x = (d.endAngle + d.startAngle) / 2 * 180 / Math.PI;
             const y = radius - donutWidth / 2;
